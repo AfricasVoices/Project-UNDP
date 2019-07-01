@@ -108,10 +108,10 @@ if __name__ == "__main__":
             user, raw_runs, raw_contacts, phone_number_uuid_table, pipeline_configuration.rapid_pro_test_contact_uuids)
 
         # Set the operator codes for each message.
-        uuids = {td["uid"] for td in traced_runs}
+        uuids = {td["avf_phone_id"] for td in traced_runs}
         uuid_to_phone_lut = phone_number_uuid_table.uuid_to_data_batch(uuids)
         for td in traced_runs:
-            operator_code = PhoneCleaner.clean_operator(uuid_to_phone_lut[td["uid"]])
+            operator_code = PhoneCleaner.clean_operator(uuid_to_phone_lut[td["avf_phone_id"]])
             if operator_code == Codes.NOT_CODED:
                 operator_label = CleaningUtils.make_label_from_cleaner_code(
                     CodeSchemes.SOMALIA_OPERATOR,
