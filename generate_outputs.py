@@ -9,7 +9,8 @@ from storage.google_cloud import google_cloud_utils
 from storage.google_drive import drive_client_wrapper
 
 from src import CombineRawDatasets, TranslateRapidProKeys
-from src.lib import PipelineConfiguration
+from src.lib import PipelineConfiguration, MessageFilters
+from src.lib.pipeline_configuration import CodeSchemes
 
 Logger.set_project_name("UNDP-RCO")
 log = Logger(__name__)
@@ -108,6 +109,9 @@ if __name__ == "__main__":
     for dataset in surveys_datasets:
         coalesced_surveys_datasets.append(CombineRawDatasets.coalesce_traced_runs_by_key(user, dataset, "avf_phone_id"))
     data = CombineRawDatasets.combine_raw_datasets(user, messages_datasets, coalesced_surveys_datasets)
+
+    data = MessageFilters.filter_operator(data, "operator_coded",
+                                          CodeSchemes.SOMALIA_OPERATOR.get_code_with_match_value("hormud"))
 
     log.info("Translating Rapid Pro Keys...")
     data = TranslateRapidProKeys.translate_rapid_pro_keys(user, data, pipeline_configuration, prev_coded_dir_path)
