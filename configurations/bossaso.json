@@ -2,17 +2,22 @@
   "RapidProDomain": "textit.in",
   "RapidProTokenFileURL": "gs://avf-credentials/csap-text-it-token.txt",
   "ActivationFlowNames": [
-
+    "csap_s03e01_activation"
   ],
   "SurveyFlowNames": [
-
+    "csap_demog",
+    "csap_s02_demog",
+    "csap_s03_demog"
   ],
   "RapidProTestContactUUIDs": [
-
+    "6f251195-5889-437a-a8b5-ad74b8e4eb62",
+    "ed65f87f-4805-42ad-9b66-27f34c81c4ff",
+    "e5b3d475-4e73-41a0-80a2-b39b28aad89c",
+    "856a55d8-9159-4970-bd22-ede3ae5f94e0"
   ],
   "PhoneNumberUuidTable": {
     "FirebaseCredentialsFileURL": "gs://avf-credentials/avf-id-infrastructure-firebase-adminsdk-6xps8-b9173f2bfd.json",
-    "TableName": "UNDP_phone_number_avf_phone_id"  // TODO: Or CSAP??
+    "TableName": "_test_UNDP_RCO_phone_number_avf_phone_id"
   },
   "RapidProKeyRemappings": [
 
@@ -22,10 +27,11 @@
   "FilterTestMessages": false,
   "DriveUpload": {
     "DriveCredentialsFileURL": "gs://avf-credentials/pipeline-runner-service-acct-avf-data-core-64cc71459fe7.json",
-    "ProductionUploadPath": "undp_analysis_outputs/csap_s03_bossaso_production.csv",
-    "MessagesUploadPath": "undp_analysis_outputs/csap_s03_bossaso_messages.csv",
-    "IndividualsUploadPath": "undp_analysis_outputs/csap_s03_bossaso_individuals.csv",
-    "TracedDataUploadPath": "undp_analysis_outputs/csap_s03_bossaso_traced_data.json"
+    "ProductionUploadPath": "undp_rco_analysis_outputs/csap_s03_bossaso_production.csv",
+    "MessagesUploadPath": "undp_rco_analysis_outputs/csap_s03_bossaso_messages.csv",
+    "IndividualsUploadPath": "undp_rco_analysis_outputs/csap_s03_bossaso_individuals.csv",
+    "MessagesTracedDataUploadPath": "undp_rco_analysis_outputs/csap_s03_bossaso_traced_data_messages.json",
+    "IndividualsTracedDataUploadPath": "undp_rco_analysis_outputs/csap_s03_bossaso_traced_data_individuals.json"
   },
-  "FlowDefinitionsUploadURLPrefix": "gs://avf-flow-definitions-test/UNDP-test-"
+  "FlowDefinitionsUploadURLPrefix": "gs://avf-flow-definitions-test/UNDP-RCO-test-"
 }

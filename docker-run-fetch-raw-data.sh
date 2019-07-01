@@ -2,7 +2,7 @@
 
 set -e
 
-IMAGE_NAME=undp
+IMAGE_NAME=undp-rco
 
 while [[ $# -gt 0 ]]; do
     case "$1" in
