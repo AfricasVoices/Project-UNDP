@@ -11,7 +11,7 @@ from temba_client.v2 import Contact, Run
 
 from src.lib import PipelineConfiguration
 
-Logger.set_project_name("UNDP")
+Logger.set_project_name("UNDP-RCO")
 log = Logger(__name__)
 
 if __name__ == "__main__":
