@@ -110,10 +110,11 @@ if __name__ == "__main__":
         coalesced_surveys_datasets.append(CombineRawDatasets.coalesce_traced_runs_by_key(user, dataset, "avf_phone_id"))
     data = CombineRawDatasets.combine_raw_datasets(user, messages_datasets, coalesced_surveys_datasets)
 
-    # TODO: Add a switch for golis vs. hormud
-    #       (Bossaso is using Golis, Baidoo is using Hormuud)
-    data = MessageFilters.filter_operator(data, "operator_coded",
-                                          CodeSchemes.SOMALIA_OPERATOR.get_code_with_match_value("golis"))
+    if pipeline_configuration.filter_operator is not None:
+        data = MessageFilters.filter_operator(
+            data, "operator_coded",
+            CodeSchemes.SOMALIA_OPERATOR.get_code_with_match_value(pipeline_configuration.filter_operator)
+        )
 
     log.info("Translating Rapid Pro Keys...")
     data = TranslateRapidProKeys.translate_rapid_pro_keys(user, data, pipeline_configuration, prev_coded_dir_path)

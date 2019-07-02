@@ -64,7 +64,7 @@ class PipelineConfiguration(object):
     def __init__(self, rapid_pro_domain, rapid_pro_token_file_url, activation_flow_names, survey_flow_names,
                  rapid_pro_test_contact_uuids, phone_number_uuid_table, recovery_csv_urls, rapid_pro_key_remappings,
                  project_start_date, project_end_date, filter_test_messages,
-                 flow_definitions_upload_url_prefix, drive_upload=None):
+                 flow_definitions_upload_url_prefix, filter_operator=None, drive_upload=None):
         """
         :param rapid_pro_domain: URL of the Rapid Pro server to download data from.
         :type rapid_pro_domain: str
@@ -97,6 +97,10 @@ class PipelineConfiguration(object):
         :type flow_definitions_upload_url_prefix: str
         :param recovery_csv_urls: GS URLs to CSVs in Shaqadoon's recovery format, or None.
         :type recovery_csv_urls: list of str | None
+        :param filter_operator: The name of the operator to filter for, or None. If an operator is given, messages
+                                received from another operator are dropped. If this key is not provided, no filtering
+                                is performed.
+        :type filter_operator: str | None
         :param drive_upload: Configuration for uploading to Google Drive, or None.
                              If None, does not upload to Google Drive.
         :type drive_upload: DriveUploadPaths | None
@@ -112,6 +116,7 @@ class PipelineConfiguration(object):
         self.project_start_date = project_start_date
         self.project_end_date = project_end_date
         self.filter_test_messages = filter_test_messages
+        self.filter_operator = filter_operator
         self.drive_upload = drive_upload
         self.flow_definitions_upload_url_prefix = flow_definitions_upload_url_prefix
 
@@ -136,6 +141,7 @@ class PipelineConfiguration(object):
         project_end_date = isoparse(configuration_dict["ProjectEndDate"])
 
         filter_test_messages = configuration_dict["FilterTestMessages"]
+        filter_operator = configuration_dict.get("FilterOperator")
 
         drive_upload_paths = None
         if "DriveUpload" in configuration_dict:
@@ -146,7 +152,7 @@ class PipelineConfiguration(object):
         return cls(rapid_pro_domain, rapid_pro_token_file_url, activation_flow_names, survey_flow_names,
                    rapid_pro_test_contact_uuids, phone_number_uuid_table, recovery_csv_urls, rapid_pro_key_remappings,
                    project_start_date, project_end_date, filter_test_messages,
-                   flow_definitions_upload_url_prefix, drive_upload_paths)
+                   flow_definitions_upload_url_prefix, filter_operator, drive_upload_paths)
 
     @classmethod
     def from_configuration_file(cls, f):
@@ -186,6 +192,9 @@ class PipelineConfiguration(object):
         validators.validate_datetime(self.project_end_date, "project_end_date")
 
         validators.validate_bool(self.filter_test_messages, "filter_test_messages")
+
+        if self.filter_operator is not None:
+            validators.validate_bool(self.filter_operator, "filter_operator")
 
         if self.drive_upload is not None:
             assert isinstance(self.drive_upload, DriveUpload), \
