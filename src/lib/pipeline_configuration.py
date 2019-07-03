@@ -63,7 +63,7 @@ class PipelineConfiguration(object):
                            coding_mode=CodingModes.MULTIPLE,
                            code_scheme=CodeSchemes.S03E01_BOSSASO_REASONS,
                            coded_field="rqa_s03e01_bossaso_coded",
-                           analysis_file_key="rqa_s03e01_bossaso",
+                           analysis_file_key="rqa_s03e01_bossaso_",
                            folding_mode=FoldingModes.MATRIX
                        )
                    ],
