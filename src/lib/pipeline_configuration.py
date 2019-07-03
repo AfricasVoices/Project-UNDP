@@ -13,7 +13,7 @@ def _open_scheme(filename):
 
 
 class CodeSchemes(object):
-    pass
+    SOMALIA_OPERATOR = _open_scheme("somalia_operator.json")
 
 
 class CodingPlan(object):

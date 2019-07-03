@@ -1,15 +1,19 @@
 import argparse
 import json
 
+from core_data_modules.cleaners import PhoneCleaner, Codes
+from core_data_modules.cleaners.cleaning_utils import CleaningUtils
 from core_data_modules.logging import Logger
+from core_data_modules.traced_data import Metadata
 from core_data_modules.traced_data.io import TracedDataJsonIO
-from core_data_modules.util import IOUtils
+from core_data_modules.util import IOUtils, TimeUtils
 from id_infrastructure.firestore_uuid_table import FirestoreUuidTable
 from rapid_pro_tools.rapid_pro_client import RapidProClient
 from storage.google_cloud import google_cloud_utils
 from temba_client.v2 import Contact, Run
 
 from src.lib import PipelineConfiguration
+from src.lib.pipeline_configuration import CodeSchemes
 
 Logger.set_project_name("UNDP-RCO")
 log = Logger(__name__)
@@ -102,6 +106,26 @@ if __name__ == "__main__":
         # Convert the runs to TracedData.
         traced_runs = rapid_pro.convert_runs_to_traced_data(
             user, raw_runs, raw_contacts, phone_number_uuid_table, pipeline_configuration.rapid_pro_test_contact_uuids)
+
+        # Set the operator codes for each message.
+        uuids = {td["avf_phone_id"] for td in traced_runs}
+        uuid_to_phone_lut = phone_number_uuid_table.uuid_to_data_batch(uuids)
+        for td in traced_runs:
+            operator_code = PhoneCleaner.clean_operator(uuid_to_phone_lut[td["avf_phone_id"]])
+            if operator_code == Codes.NOT_CODED:
+                operator_label = CleaningUtils.make_label_from_cleaner_code(
+                    CodeSchemes.SOMALIA_OPERATOR,
+                    CodeSchemes.SOMALIA_OPERATOR.get_code_with_control_code(Codes.NOT_CODED),
+                    Metadata.get_call_location()
+                )
+            else:
+                operator_label = CleaningUtils.make_label_from_cleaner_code(
+                    CodeSchemes.SOMALIA_OPERATOR,
+                    CodeSchemes.SOMALIA_OPERATOR.get_code_with_match_value(operator_code),
+                    Metadata.get_call_location()
+                )
+            td.append_data({"operator_coded": operator_label.to_dict()},
+                           Metadata(user, Metadata.get_call_location(), TimeUtils.utc_now_as_iso_string()))
 
         log.info(f"Saving {len(raw_runs)} raw runs to {raw_runs_path}...")
         with open(raw_runs_path, "w") as raw_runs_file:
