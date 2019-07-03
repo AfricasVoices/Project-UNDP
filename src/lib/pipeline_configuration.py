@@ -2,7 +2,7 @@ import json
 from urllib.parse import urlparse
 
 from core_data_modules.cleaners import somali, Codes
-from core_data_modules.data_models import Scheme, validators
+from core_data_modules.data_models import validators
 from dateutil.parser import isoparse
 
 from src.lib import code_imputation_functions
