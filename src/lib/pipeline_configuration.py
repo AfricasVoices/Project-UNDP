@@ -63,7 +63,55 @@ class PipelineConfiguration(object):
                            coding_mode=CodingModes.MULTIPLE,
                            code_scheme=CodeSchemes.S03E01_BOSSASO_REASONS,
                            coded_field="rqa_s03e01_bossaso_coded",
-                           analysis_file_key="rqa_s03e01_bossaso",
+                           analysis_file_key="rqa_s03e01_bossaso_",
+                           folding_mode=FoldingModes.MATRIX
+                       )
+                   ],
+                   raw_field_folding_mode=FoldingModes.CONCATENATE),
+
+        CodingPlan(raw_field="rqa_s03e02_bossaso_raw",
+                   time_field="sent_on",
+                   run_id_field="rqa_s03e02_bossaso_run_id",
+                   coda_filename="s03e02_bossaso.json",
+                   icr_filename="s03e02_bossaso.csv",
+                   coding_configurations=[
+                       CodingConfiguration(
+                           coding_mode=CodingModes.MULTIPLE,
+                           code_scheme=CodeSchemes.S03E02_BOSSASO_REASONS,
+                           coded_field="rqa_s03e02_bossaso_coded",
+                           analysis_file_key="rqa_s03e02_bossaso_",
+                           folding_mode=FoldingModes.MATRIX
+                       )
+                   ],
+                   raw_field_folding_mode=FoldingModes.CONCATENATE),
+
+        CodingPlan(raw_field="rqa_s03e03_bossaso_raw",
+                   time_field="sent_on",
+                   run_id_field="rqa_s03e03_bossaso_run_id",
+                   coda_filename="s03e03_bossaso.json",
+                   icr_filename="s03e03_bossaso.csv",
+                   coding_configurations=[
+                       CodingConfiguration(
+                           coding_mode=CodingModes.MULTIPLE,
+                           code_scheme=CodeSchemes.S03E03_BOSSASO_REASONS,
+                           coded_field="rqa_s03e03_bossaso_coded",
+                           analysis_file_key="rqa_s03e03_bossaso_",
+                           folding_mode=FoldingModes.MATRIX
+                       )
+                   ],
+                   raw_field_folding_mode=FoldingModes.CONCATENATE),
+
+        CodingPlan(raw_field="rqa_s03e04_bossaso_raw",
+                   time_field="sent_on",
+                   run_id_field="rqa_s03e04_bossaso_run_id",
+                   coda_filename="s03e04_bossaso.json",
+                   icr_filename="s03e04_bossaso.csv",
+                   coding_configurations=[
+                       CodingConfiguration(
+                           coding_mode=CodingModes.MULTIPLE,
+                           code_scheme=CodeSchemes.S03E04_BOSSASO_REASONS,
+                           coded_field="rqa_s03e04_bossaso_coded",
+                           analysis_file_key="rqa_s03e04_bossaso_",
                            folding_mode=FoldingModes.MATRIX
                        )
                    ],
