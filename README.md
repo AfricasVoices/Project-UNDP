@@ -4,6 +4,12 @@ Data pipeline for UNDP-RCO.
 This pipeline fetches all project data from a Rapid Pro instance, and processes it to produce CSV files suitable
 for downstream analysis.
 
+The pipeline for UNDP-RCO is unusual in that it supports two sub-projects - one for the work in Bossaso, the other for 
+the work in Baidoa. The two sub-projects share flows in TextIt, and have the same structure of pipeline outputs,
+but have separate analysis files, ICR files, and Coda datasets. To run each sub-project, use the following steps,
+once for Bossaso (using the configuration file `configurations/bosssaso.json`), and once for Baidoa
+(using the configuration file `configurations/baidoa.json`).
+
 ## Pre-requisites
 Before the pipeline can be run, the following tools must be installed:
  - Docker
