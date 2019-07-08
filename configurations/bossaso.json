@@ -17,7 +17,7 @@
   ],
   "PhoneNumberUuidTable": {
     "FirebaseCredentialsFileURL": "gs://avf-credentials/avf-id-infrastructure-firebase-adminsdk-6xps8-b9173f2bfd.json",
-    "TableName": "_test_UNDP_RCO_phone_number_avf_phone_id"
+    "TableName": "ADSS"
   },
   "RapidProKeyRemappings": [
     {"RapidProKey": "avf_phone_id", "PipelineKey": "uid"},
