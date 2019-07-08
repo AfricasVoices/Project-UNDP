@@ -53,9 +53,9 @@ class CodingPlan(object):
 
 class PipelineConfiguration(object):
     RQA_CODING_PLANS = [
-        CodingPlan(raw_field="rqa_s03e01_bossaso_raw",
+        CodingPlan(raw_field="rqa_s03e01_raw",
                    time_field="sent_on",
-                   run_id_field="rqa_s03e01_bossaso_run_id",
+                   run_id_field="rqa_s03e01_run_id",
                    coda_filename="s03e01_bossaso.json",
                    icr_filename="s03e01_bossaso.csv",
                    coding_configurations=[
@@ -69,9 +69,9 @@ class PipelineConfiguration(object):
                    ],
                    raw_field_folding_mode=FoldingModes.CONCATENATE),
 
-        CodingPlan(raw_field="rqa_s03e02_bossaso_raw",
+        CodingPlan(raw_field="rqa_s03e02_raw",
                    time_field="sent_on",
-                   run_id_field="rqa_s03e02_bossaso_run_id",
+                   run_id_field="rqa_s03e02_run_id",
                    coda_filename="s03e02_bossaso.json",
                    icr_filename="s03e02_bossaso.csv",
                    coding_configurations=[
@@ -85,9 +85,9 @@ class PipelineConfiguration(object):
                    ],
                    raw_field_folding_mode=FoldingModes.CONCATENATE),
 
-        CodingPlan(raw_field="rqa_s03e03_bossaso_raw",
+        CodingPlan(raw_field="rqa_s03e03_raw",
                    time_field="sent_on",
-                   run_id_field="rqa_s03e03_bossaso_run_id",
+                   run_id_field="rqa_s03e03_run_id",
                    coda_filename="s03e03_bossaso.json",
                    icr_filename="s03e03_bossaso.csv",
                    coding_configurations=[
@@ -101,9 +101,9 @@ class PipelineConfiguration(object):
                    ],
                    raw_field_folding_mode=FoldingModes.CONCATENATE),
 
-        CodingPlan(raw_field="rqa_s03e04_bossaso_raw",
+        CodingPlan(raw_field="rqa_s03e04_raw",
                    time_field="sent_on",
-                   run_id_field="rqa_s03e04_bossaso_run_id",
+                   run_id_field="rqa_s03e04_run_id",
                    coda_filename="s03e04_bossaso.json",
                    icr_filename="s03e04_bossaso.csv",
                    coding_configurations=[
