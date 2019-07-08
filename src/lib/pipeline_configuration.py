@@ -372,7 +372,7 @@ class PipelineConfiguration(object):
         validators.validate_bool(self.filter_test_messages, "filter_test_messages")
 
         if self.filter_operator is not None:
-            validators.validate_bool(self.filter_operator, "filter_operator")
+            validators.validate_string(self.filter_operator, "filter_operator")
 
         if self.drive_upload is not None:
             assert isinstance(self.drive_upload, DriveUpload), \

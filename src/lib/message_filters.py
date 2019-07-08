@@ -9,7 +9,7 @@ class MessageFilters(object):
     @staticmethod
     def filter_operator(messages, operator_key, operator_code):
         log.debug(f"Filtering for messages with operator code {operator_code.display_text}")
-        filtered = [td for td in messages if td[operator_key].code_id == operator_code.code_id]
+        filtered = [td for td in messages if td[operator_key]["CodeID"] == operator_code.code_id]
         log.info(f"Filtered for messages from operator {operator_code.display_text}. "
                  f"Returning {len(filtered)}/{len(messages)} messages.")
         return filtered
