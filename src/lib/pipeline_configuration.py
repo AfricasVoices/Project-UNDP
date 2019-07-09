@@ -2,37 +2,49 @@ import json
 from urllib.parse import urlparse
 
 from core_data_modules.cleaners import somali, Codes
-from core_data_modules.data_models import Scheme, validators
+from core_data_modules.data_models import validators
 from dateutil.parser import isoparse
 
-
-def _open_scheme(filename):
-    with open(f"code_schemes/{filename}", "r") as f:
-        firebase_map = json.load(f)
-        return Scheme.from_firebase_map(firebase_map)
+from src.lib import code_imputation_functions
+from src.lib.code_schemes import CodeSchemes
 
 
-class CodeSchemes(object):
-    SOMALIA_OPERATOR = _open_scheme("somalia_operator.json")
+class CodingModes(object):
+    SINGLE = "SINGLE"
+    MULTIPLE = "MULTIPLE"
 
 
-class CodingPlan(object):
-    # TODO: Update this signature with the new list of coding_configurations piloted on AHADI
-    def __init__(self, raw_field, coded_field, coda_filename, cleaner=None, code_scheme=None, time_field=None,
-                 run_id_field=None, icr_filename=None, analysis_file_key=None, id_field=None,
-                 binary_code_scheme=None, binary_coded_field=None, binary_analysis_file_key=None):
-        self.raw_field = raw_field
-        self.coded_field = coded_field
-        self.coda_filename = coda_filename
-        self.icr_filename = icr_filename
-        self.cleaner = cleaner
+class FoldingModes(object):
+    ASSERT_EQUAL = "ASSERT_EQUAL"
+    YES_NO_AMB = "YES_NO_AMB"
+    CONCATENATE = "CONCATENATE"
+    MATRIX = "MATRIX"
+
+
+class CodingConfiguration(object):
+    def __init__(self, coding_mode, code_scheme, coded_field, folding_mode, analysis_file_key=None, cleaner=None):
+        assert coding_mode in {CodingModes.SINGLE, CodingModes.MULTIPLE}
+
+        self.coding_mode = coding_mode
         self.code_scheme = code_scheme
+        self.coded_field = coded_field
+        self.analysis_file_key = analysis_file_key
+        self.folding_mode = folding_mode
+        self.cleaner = cleaner
+
+
+# TODO: Rename CodingPlan to something like DatasetConfiguration?
+class CodingPlan(object):
+    def __init__(self, raw_field, coda_filename, coding_configurations, raw_field_folding_mode, time_field=None,
+                 run_id_field=None, icr_filename=None, id_field=None, code_imputation_function=None):
+        self.raw_field = raw_field
         self.time_field = time_field
         self.run_id_field = run_id_field
-        self.analysis_file_key = analysis_file_key
-        self.binary_code_scheme = binary_code_scheme
-        self.binary_coded_field = binary_coded_field
-        self.binary_analysis_file_key = binary_analysis_file_key
+        self.coda_filename = coda_filename
+        self.icr_filename = icr_filename
+        self.coding_configurations = coding_configurations
+        self.code_imputation_function = code_imputation_function
+        self.raw_field_folding_mode = raw_field_folding_mode
 
         if id_field is None:
             id_field = "{}_id".format(self.raw_field)
@@ -40,7 +52,71 @@ class CodingPlan(object):
 
 
 class PipelineConfiguration(object):
-    RQA_CODING_PLANS = []
+    RQA_CODING_PLANS = [
+        CodingPlan(raw_field="rqa_s03e01_raw",
+                   time_field="sent_on",
+                   run_id_field="rqa_s03e01_run_id",
+                   coda_filename="s03e01_bossaso.json",
+                   icr_filename="s03e01_bossaso.csv",
+                   coding_configurations=[
+                       CodingConfiguration(
+                           coding_mode=CodingModes.MULTIPLE,
+                           code_scheme=CodeSchemes.S03E01_BOSSASO_REASONS,
+                           coded_field="rqa_s03e01_bossaso_coded",
+                           analysis_file_key="rqa_s03e01_bossaso_",
+                           folding_mode=FoldingModes.MATRIX
+                       )
+                   ],
+                   raw_field_folding_mode=FoldingModes.CONCATENATE),
+
+        CodingPlan(raw_field="rqa_s03e02_raw",
+                   time_field="sent_on",
+                   run_id_field="rqa_s03e02_run_id",
+                   coda_filename="s03e02_bossaso.json",
+                   icr_filename="s03e02_bossaso.csv",
+                   coding_configurations=[
+                       CodingConfiguration(
+                           coding_mode=CodingModes.MULTIPLE,
+                           code_scheme=CodeSchemes.S03E02_BOSSASO_REASONS,
+                           coded_field="rqa_s03e02_bossaso_coded",
+                           analysis_file_key="rqa_s03e02_bossaso_",
+                           folding_mode=FoldingModes.MATRIX
+                       )
+                   ],
+                   raw_field_folding_mode=FoldingModes.CONCATENATE),
+
+        CodingPlan(raw_field="rqa_s03e03_raw",
+                   time_field="sent_on",
+                   run_id_field="rqa_s03e03_run_id",
+                   coda_filename="s03e03_bossaso.json",
+                   icr_filename="s03e03_bossaso.csv",
+                   coding_configurations=[
+                       CodingConfiguration(
+                           coding_mode=CodingModes.MULTIPLE,
+                           code_scheme=CodeSchemes.S03E03_BOSSASO_REASONS,
+                           coded_field="rqa_s03e03_bossaso_coded",
+                           analysis_file_key="rqa_s03e03_bossaso_",
+                           folding_mode=FoldingModes.MATRIX
+                       )
+                   ],
+                   raw_field_folding_mode=FoldingModes.CONCATENATE),
+
+        CodingPlan(raw_field="rqa_s03e04_raw",
+                   time_field="sent_on",
+                   run_id_field="rqa_s03e04_run_id",
+                   coda_filename="s03e04_bossaso.json",
+                   icr_filename="s03e04_bossaso.csv",
+                   coding_configurations=[
+                       CodingConfiguration(
+                           coding_mode=CodingModes.MULTIPLE,
+                           code_scheme=CodeSchemes.S03E04_BOSSASO_REASONS,
+                           coded_field="rqa_s03e04_bossaso_coded",
+                           analysis_file_key="rqa_s03e04_bossaso_",
+                           folding_mode=FoldingModes.MATRIX
+                       )
+                   ],
+                   raw_field_folding_mode=FoldingModes.CONCATENATE)
+        ]
 
     @staticmethod
     def clean_age_with_range_filter(text):
@@ -55,16 +131,118 @@ class PipelineConfiguration(object):
         else:
             return Codes.NOT_CODED
 
-    LOCATION_CODING_PLANS = []
+    SURVEY_CODING_PLANS = [
+        CodingPlan(raw_field="location_raw",
+                   time_field="location_time",
+                   coda_filename="location.json",
+                   coding_configurations=[
+                       CodingConfiguration(
+                           coding_mode=CodingModes.SINGLE,
+                           code_scheme=CodeSchemes.MOGADISHU_SUB_DISTRICT,
+                           coded_field="mogadishu_sub_district_coded",
+                           # This code exists for compatibility with the previous CSAP demog datasets.
+                           # Not including in the analysis file because this project is not in Mogadishu.
+                           folding_mode=FoldingModes.ASSERT_EQUAL
+                       ),
+                       CodingConfiguration(
+                           coding_mode=CodingModes.SINGLE,
+                           code_scheme=CodeSchemes.SOMALIA_DISTRICT,
+                           cleaner=somali.DemographicCleaner.clean_somalia_district,
+                           coded_field="district_coded",
+                           analysis_file_key="district",
+                           folding_mode=FoldingModes.ASSERT_EQUAL
+                       ),
+                       CodingConfiguration(
+                           coding_mode=CodingModes.SINGLE,
+                           code_scheme=CodeSchemes.SOMALIA_REGION,
+                           coded_field="region_coded",
+                           analysis_file_key="region",
+                           folding_mode=FoldingModes.ASSERT_EQUAL
+                       ),
+                       CodingConfiguration(
+                           coding_mode=CodingModes.SINGLE,
+                           code_scheme=CodeSchemes.SOMALIA_STATE,
+                           coded_field="state_coded",
+                           analysis_file_key="state",
+                           folding_mode=FoldingModes.ASSERT_EQUAL
+                       ),
+                       CodingConfiguration(
+                           coding_mode=CodingModes.SINGLE,
+                           code_scheme=CodeSchemes.SOMALIA_ZONE,
+                           coded_field="zone_coded",
+                           # This code exists for compatibility with the previous CSAP demog datasets.
+                           # Not including in the analysis file because the zone is implicit from the project.
+                           folding_mode=FoldingModes.ASSERT_EQUAL
+                       )
+                   ],
+                   code_imputation_function=code_imputation_functions.impute_somalia_location_codes,
+                   raw_field_folding_mode=FoldingModes.ASSERT_EQUAL),
 
-    SURVEY_CODING_PLANS = []
-    SURVEY_CODING_PLANS.extend(LOCATION_CODING_PLANS)
-    SURVEY_CODING_PLANS.extend([])
+        CodingPlan(raw_field="gender_raw",
+                   time_field="gender_time",
+                   coda_filename="gender.json",
+                   coding_configurations=[
+                       CodingConfiguration(
+                           coding_mode=CodingModes.SINGLE,
+                           code_scheme=CodeSchemes.GENDER,
+                           cleaner=somali.DemographicCleaner.clean_gender,
+                           coded_field="gender_coded",
+                           analysis_file_key="gender",
+                           folding_mode=FoldingModes.ASSERT_EQUAL
+                       )
+                   ],
+                   raw_field_folding_mode=FoldingModes.ASSERT_EQUAL),
+
+        CodingPlan(raw_field="age_raw",
+                   time_field="age_time",
+                   coda_filename="age.json",
+                   coding_configurations=[
+                       CodingConfiguration(
+                           coding_mode=CodingModes.SINGLE,
+                           code_scheme=CodeSchemes.AGE,
+                           cleaner=lambda text: PipelineConfiguration.clean_age_with_range_filter(text),
+                           coded_field="age_coded",
+                           analysis_file_key="age",
+                           folding_mode=FoldingModes.ASSERT_EQUAL
+                       )
+                   ],
+                   raw_field_folding_mode=FoldingModes.ASSERT_EQUAL),
+
+        CodingPlan(raw_field="recently_displaced_raw",
+                   time_field="recently_displaced_time",
+                   coda_filename="recently_displaced.json",
+                   coding_configurations=[
+                       CodingConfiguration(
+                           coding_mode=CodingModes.SINGLE,
+                           code_scheme=CodeSchemes.RECENTLY_DISPLACED,
+                           cleaner=somali.DemographicCleaner.clean_yes_no,
+                           coded_field="recently_displaced_coded",
+                           analysis_file_key="recently_displaced",
+                           folding_mode=FoldingModes.ASSERT_EQUAL
+                       )
+                   ],
+                   raw_field_folding_mode=FoldingModes.ASSERT_EQUAL),
+
+        CodingPlan(raw_field="in_idp_camp_raw",
+                   time_field="in_idp_camp_time",
+                   coda_filename="in_idp_camp.json",
+                   coding_configurations=[
+                       CodingConfiguration(
+                           coding_mode=CodingModes.SINGLE,
+                           code_scheme=CodeSchemes.IN_IDP_CAMP,
+                           cleaner=somali.DemographicCleaner.clean_yes_no,
+                           coded_field="in_idp_camp_coded",
+                           analysis_file_key="in_idp_camp",
+                           folding_mode=FoldingModes.ASSERT_EQUAL
+                       )
+                   ],
+                   raw_field_folding_mode=FoldingModes.ASSERT_EQUAL)
+    ]
 
     def __init__(self, rapid_pro_domain, rapid_pro_token_file_url, activation_flow_names, survey_flow_names,
                  rapid_pro_test_contact_uuids, phone_number_uuid_table, recovery_csv_urls, rapid_pro_key_remappings,
                  project_start_date, project_end_date, filter_test_messages,
-                 flow_definitions_upload_url_prefix, drive_upload=None):
+                 flow_definitions_upload_url_prefix, filter_operator=None, drive_upload=None):
         """
         :param rapid_pro_domain: URL of the Rapid Pro server to download data from.
         :type rapid_pro_domain: str
@@ -97,6 +275,10 @@ class PipelineConfiguration(object):
         :type flow_definitions_upload_url_prefix: str
         :param recovery_csv_urls: GS URLs to CSVs in Shaqadoon's recovery format, or None.
         :type recovery_csv_urls: list of str | None
+        :param filter_operator: The name of the operator to filter for, or None. If an operator is given, messages
+                                received from another operator are dropped. If this key is not provided, no filtering
+                                is performed.
+        :type filter_operator: str | None
         :param drive_upload: Configuration for uploading to Google Drive, or None.
                              If None, does not upload to Google Drive.
         :type drive_upload: DriveUploadPaths | None
@@ -112,6 +294,7 @@ class PipelineConfiguration(object):
         self.project_start_date = project_start_date
         self.project_end_date = project_end_date
         self.filter_test_messages = filter_test_messages
+        self.filter_operator = filter_operator
         self.drive_upload = drive_upload
         self.flow_definitions_upload_url_prefix = flow_definitions_upload_url_prefix
 
@@ -136,6 +319,7 @@ class PipelineConfiguration(object):
         project_end_date = isoparse(configuration_dict["ProjectEndDate"])
 
         filter_test_messages = configuration_dict["FilterTestMessages"]
+        filter_operator = configuration_dict.get("FilterOperator")
 
         drive_upload_paths = None
         if "DriveUpload" in configuration_dict:
@@ -146,7 +330,7 @@ class PipelineConfiguration(object):
         return cls(rapid_pro_domain, rapid_pro_token_file_url, activation_flow_names, survey_flow_names,
                    rapid_pro_test_contact_uuids, phone_number_uuid_table, recovery_csv_urls, rapid_pro_key_remappings,
                    project_start_date, project_end_date, filter_test_messages,
-                   flow_definitions_upload_url_prefix, drive_upload_paths)
+                   flow_definitions_upload_url_prefix, filter_operator, drive_upload_paths)
 
     @classmethod
     def from_configuration_file(cls, f):
@@ -186,6 +370,9 @@ class PipelineConfiguration(object):
         validators.validate_datetime(self.project_end_date, "project_end_date")
 
         validators.validate_bool(self.filter_test_messages, "filter_test_messages")
+
+        if self.filter_operator is not None:
+            validators.validate_string(self.filter_operator, "filter_operator")
 
         if self.drive_upload is not None:
             assert isinstance(self.drive_upload, DriveUpload), \

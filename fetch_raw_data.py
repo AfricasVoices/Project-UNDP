@@ -108,24 +108,25 @@ if __name__ == "__main__":
             user, raw_runs, raw_contacts, phone_number_uuid_table, pipeline_configuration.rapid_pro_test_contact_uuids)
 
         # Set the operator codes for each message.
-        uuids = {td["avf_phone_id"] for td in traced_runs}
-        uuid_to_phone_lut = phone_number_uuid_table.uuid_to_data_batch(uuids)
-        for td in traced_runs:
-            operator_code = PhoneCleaner.clean_operator(uuid_to_phone_lut[td["avf_phone_id"]])
-            if operator_code == Codes.NOT_CODED:
-                operator_label = CleaningUtils.make_label_from_cleaner_code(
-                    CodeSchemes.SOMALIA_OPERATOR,
-                    CodeSchemes.SOMALIA_OPERATOR.get_code_with_control_code(Codes.NOT_CODED),
-                    Metadata.get_call_location()
-                )
-            else:
-                operator_label = CleaningUtils.make_label_from_cleaner_code(
-                    CodeSchemes.SOMALIA_OPERATOR,
-                    CodeSchemes.SOMALIA_OPERATOR.get_code_with_match_value(operator_code),
-                    Metadata.get_call_location()
-                )
-            td.append_data({"operator_coded": operator_label.to_dict()},
-                           Metadata(user, Metadata.get_call_location(), TimeUtils.utc_now_as_iso_string()))
+        if flow in pipeline_configuration.activation_flow_names:
+            uuids = {td["avf_phone_id"] for td in traced_runs}
+            uuid_to_phone_lut = phone_number_uuid_table.uuid_to_data_batch(uuids)
+            for td in traced_runs:
+                operator_code = PhoneCleaner.clean_operator(uuid_to_phone_lut[td["avf_phone_id"]])
+                if operator_code == Codes.NOT_CODED:
+                    operator_label = CleaningUtils.make_label_from_cleaner_code(
+                        CodeSchemes.SOMALIA_OPERATOR,
+                        CodeSchemes.SOMALIA_OPERATOR.get_code_with_control_code(Codes.NOT_CODED),
+                        Metadata.get_call_location()
+                    )
+                else:
+                    operator_label = CleaningUtils.make_label_from_cleaner_code(
+                        CodeSchemes.SOMALIA_OPERATOR,
+                        CodeSchemes.SOMALIA_OPERATOR.get_code_with_match_value(operator_code),
+                        Metadata.get_call_location()
+                    )
+                td.append_data({"operator_coded": operator_label.to_dict()},
+                               Metadata(user, Metadata.get_call_location(), TimeUtils.utc_now_as_iso_string()))
 
         log.info(f"Saving {len(raw_runs)} raw runs to {raw_runs_path}...")
         with open(raw_runs_path, "w") as raw_runs_file:
