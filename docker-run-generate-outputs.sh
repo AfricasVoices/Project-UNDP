@@ -74,8 +74,8 @@ docker start -a -i "$container"
 mkdir -p "$(dirname "$OUTPUT_MESSAGES_JSONL")"
 docker cp "$container:/data/output-messages.jsonl" "$OUTPUT_MESSAGES_JSONL"
 
-#mkdir -p "$(dirname "$OUTPUT_INDIVIDUALS_JSON")"
-#docker cp "$container:/data/output-individuals.json" "$OUTPUT_INDIVIDUALS_JSON"
+mkdir -p "$(dirname "$OUTPUT_INDIVIDUALS_JSON")"
+docker cp "$container:/data/output-individuals.json" "$OUTPUT_INDIVIDUALS_JSON"
 
 mkdir -p "$OUTPUT_ICR_DIR"
 docker cp "$container:/data/output-icr/." "$OUTPUT_ICR_DIR"
@@ -86,11 +86,11 @@ docker cp "$container:/data/coded/." "$OUTPUT_CODED_DIR"
 mkdir -p "$(dirname "$OUTPUT_PRODUCTION_CSV")"
 docker cp "$container:/data/output-production.csv" "$OUTPUT_PRODUCTION_CSV"
 
-#mkdir -p "$(dirname "$OUTPUT_MESSAGES_CSV")"
-#docker cp "$container:/data/output-messages.csv" "$OUTPUT_MESSAGES_CSV"
-#
-#mkdir -p "$(dirname "$OUTPUT_INDIVIDUALS_CSV")"
-#docker cp "$container:/data/output-individuals.csv" "$OUTPUT_INDIVIDUALS_CSV"
+mkdir -p "$(dirname "$OUTPUT_MESSAGES_CSV")"
+docker cp "$container:/data/output-messages.csv" "$OUTPUT_MESSAGES_CSV"
+
+mkdir -p "$(dirname "$OUTPUT_INDIVIDUALS_CSV")"
+docker cp "$container:/data/output-individuals.csv" "$OUTPUT_INDIVIDUALS_CSV"
 
 if [[ "$PROFILE_CPU" = true ]]; then
     mkdir -p "$(dirname "$CPU_PROFILE_OUTPUT_PATH")"
