@@ -111,6 +111,16 @@ if __name__ == "__main__":
         coalesced_surveys_datasets.append(CombineRawDatasets.coalesce_traced_runs_by_key(user, dataset, "avf_phone_id"))
     data = CombineRawDatasets.combine_raw_datasets(user, messages_datasets, coalesced_surveys_datasets)
 
+    # Infer which RQA coding plans to use from the operator.
+    # This 'hack' is necessary because the rqa coding plans are still not being set in the configuration json.
+    if pipeline_configuration.filter_operator == "golis":
+        log.info("Running in Bossaso mode")
+        PipelineConfiguration.RQA_CODING_PLANS = PipelineConfiguration.BOSSASO_RQA_CODING_PLANS
+    else:
+        assert pipeline_configuration.filter_operator == "hormud", "FilterOperator must be either 'golis' or 'hormud'"
+        log.info("Running in Baidoa mode")
+        PipelineConfiguration.RQA_CODING_PLANS = PipelineConfiguration.BAIDOA_RQA_CODING_PLANS
+
     if pipeline_configuration.filter_operator is not None:
         data = MessageFilters.filter_operator(
             data, "operator_coded",
