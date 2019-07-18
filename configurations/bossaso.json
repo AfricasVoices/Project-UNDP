@@ -68,8 +68,8 @@
     "ProductionUploadPath": "undp_rco_analysis_outputs/csap_s03_bossaso_production.csv",
     "MessagesUploadPath": "undp_rco_analysis_outputs/csap_s03_bossaso_messages.csv",
     "IndividualsUploadPath": "undp_rco_analysis_outputs/csap_s03_bossaso_individuals.csv",
-    "MessagesTracedDataUploadPath": "undp_rco_analysis_outputs/csap_s03_bossaso_messages_traced_data.json",
-    "IndividualsTracedDataUploadPath": "undp_rco_analysis_outputs/csap_s03_bossaso_individuals_traced_data.json"
+    "MessagesTracedDataUploadPath": "undp_rco_analysis_outputs/csap_s03_bossaso_messages_traced_data.jsonl",
+    "IndividualsTracedDataUploadPath": "undp_rco_analysis_outputs/csap_s03_bossaso_individuals_traced_data.jsonl"
   },
   "FlowDefinitionsUploadURLPrefix": "gs://avf-flow-definitions-test/UNDP-RCO-test-"
 }
