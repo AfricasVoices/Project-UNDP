@@ -56,7 +56,7 @@ class ApplyManualCodes(object):
 
         # Mark data that is noise as Codes.NOT_CODED
         for td in data:
-            if td["noise"]:
+            if td.get("noise", False):
                 nc_dict = dict()
                 for plan in PipelineConfiguration.RQA_CODING_PLANS:
                     for cc in plan.coding_configurations:

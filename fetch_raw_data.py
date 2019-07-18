@@ -75,8 +75,24 @@ if __name__ == "__main__":
         with open(contacts_log_path, "a") as contacts_log_file:
             raw_contacts = rapid_pro.get_raw_contacts(raw_export_log_file=contacts_log_file)
 
-    # Download all the runs for each of the radio shows
+    # Download the demog runs from previous seasons
     for flow in pipeline_configuration.activation_flow_names + pipeline_configuration.survey_flow_names:
+        if flow not in {"csap_demog", "csap_s02_demog"}:
+            continue
+
+        demog_string = google_cloud_utils.download_blob_to_string(
+            google_cloud_credentials_file_path, f"gs://avf-project-datasets/2019/UNDP-RCO/{flow}.json"
+        )
+        traced_runs_output_path = f"{raw_data_dir}/{flow}.json"
+        log.info(f"Saving {flow} to file '{traced_runs_output_path}'...")
+        with open(traced_runs_output_path, "w") as traced_runs_output_file:
+            traced_runs_output_file.write(demog_string)
+
+    # Download all the runs for each of the other surveys
+    for flow in pipeline_configuration.activation_flow_names + pipeline_configuration.survey_flow_names:
+        if flow in {"csap_demog", "csap_s02_demog"}:
+            continue
+
         runs_log_path = f"{raw_data_dir}/{flow}_log.jsonl"
         raw_runs_path = f"{raw_data_dir}/{flow}_raw.json"
         traced_runs_output_path = f"{raw_data_dir}/{flow}.json"
@@ -108,24 +124,25 @@ if __name__ == "__main__":
             user, raw_runs, raw_contacts, phone_number_uuid_table, pipeline_configuration.rapid_pro_test_contact_uuids)
 
         # Set the operator codes for each message.
-        uuids = {td["avf_phone_id"] for td in traced_runs}
-        uuid_to_phone_lut = phone_number_uuid_table.uuid_to_data_batch(uuids)
-        for td in traced_runs:
-            operator_code = PhoneCleaner.clean_operator(uuid_to_phone_lut[td["avf_phone_id"]])
-            if operator_code == Codes.NOT_CODED:
-                operator_label = CleaningUtils.make_label_from_cleaner_code(
-                    CodeSchemes.SOMALIA_OPERATOR,
-                    CodeSchemes.SOMALIA_OPERATOR.get_code_with_control_code(Codes.NOT_CODED),
-                    Metadata.get_call_location()
-                )
-            else:
-                operator_label = CleaningUtils.make_label_from_cleaner_code(
-                    CodeSchemes.SOMALIA_OPERATOR,
-                    CodeSchemes.SOMALIA_OPERATOR.get_code_with_match_value(operator_code),
-                    Metadata.get_call_location()
-                )
-            td.append_data({"operator_coded": operator_label.to_dict()},
-                           Metadata(user, Metadata.get_call_location(), TimeUtils.utc_now_as_iso_string()))
+        if flow in pipeline_configuration.activation_flow_names:
+            uuids = {td["avf_phone_id"] for td in traced_runs}
+            uuid_to_phone_lut = phone_number_uuid_table.uuid_to_data_batch(uuids)
+            for td in traced_runs:
+                operator_code = PhoneCleaner.clean_operator(uuid_to_phone_lut[td["avf_phone_id"]])
+                if operator_code == Codes.NOT_CODED:
+                    operator_label = CleaningUtils.make_label_from_cleaner_code(
+                        CodeSchemes.SOMALIA_OPERATOR,
+                        CodeSchemes.SOMALIA_OPERATOR.get_code_with_control_code(Codes.NOT_CODED),
+                        Metadata.get_call_location()
+                    )
+                else:
+                    operator_label = CleaningUtils.make_label_from_cleaner_code(
+                        CodeSchemes.SOMALIA_OPERATOR,
+                        CodeSchemes.SOMALIA_OPERATOR.get_code_with_match_value(operator_code),
+                        Metadata.get_call_location()
+                    )
+                td.append_data({"operator_coded": operator_label.to_dict()},
+                               Metadata(user, Metadata.get_call_location(), TimeUtils.utc_now_as_iso_string()))
 
         log.info(f"Saving {len(raw_runs)} raw runs to {raw_runs_path}...")
         with open(raw_runs_path, "w") as raw_runs_file:

@@ -196,7 +196,7 @@ class AnalysisFile(object):
         for td in folded_data:
             for plan in PipelineConfiguration.RQA_CODING_PLANS + PipelineConfiguration.SURVEY_CODING_PLANS:
                 for cc in plan.coding_configurations:
-                    if plan.analysis_file_key is None:
+                    if cc.analysis_file_key is None:
                         continue
 
                     if cc.coding_mode == CodingModes.MULTIPLE:
