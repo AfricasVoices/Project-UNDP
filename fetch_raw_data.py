@@ -75,11 +75,27 @@ if __name__ == "__main__":
         with open(contacts_log_path, "a") as contacts_log_file:
             raw_contacts = rapid_pro.get_raw_contacts(raw_export_log_file=contacts_log_file)
 
-    # Download all the runs for each of the radio shows
+    # Download the demog runs from previous seasons
     for flow in pipeline_configuration.activation_flow_names + pipeline_configuration.survey_flow_names:
+        if flow not in {"csap_demog", "csap_s02_demog"}:
+            continue
+
+        demog_string = google_cloud_utils.download_blob_to_string(
+            google_cloud_credentials_file_path, f"gs://avf-project-datasets/2019/UNDP-RCO/{flow}.jsonl"
+        )
+        traced_runs_output_path = f"{raw_data_dir}/{flow}.jsonl"
+        log.info(f"Saving {flow} to file '{traced_runs_output_path}'...")
+        with open(traced_runs_output_path, "w") as traced_runs_output_file:
+            traced_runs_output_file.write(demog_string)
+
+    # Download all the runs for each of the other surveys
+    for flow in pipeline_configuration.activation_flow_names + pipeline_configuration.survey_flow_names:
+        if flow in {"csap_demog", "csap_s02_demog"}:
+            continue
+
         runs_log_path = f"{raw_data_dir}/{flow}_log.jsonl"
         raw_runs_path = f"{raw_data_dir}/{flow}_raw.json"
-        traced_runs_output_path = f"{raw_data_dir}/{flow}.json"
+        traced_runs_output_path = f"{raw_data_dir}/{flow}.jsonl"
         log.info(f"Exporting flow '{flow}' to '{traced_runs_output_path}'...")
 
         flow_id = rapid_pro.get_flow_id(flow)
@@ -136,7 +152,7 @@ if __name__ == "__main__":
         log.info(f"Saving {len(traced_runs)} traced runs to {traced_runs_output_path}...")
         IOUtils.ensure_dirs_exist_for_file(traced_runs_output_path)
         with open(traced_runs_output_path, "w") as traced_runs_output_file:
-            TracedDataJsonIO.export_traced_data_iterable_to_json(traced_runs, traced_runs_output_file, pretty_print=True)
+            TracedDataJsonIO.export_traced_data_iterable_to_jsonl(traced_runs, traced_runs_output_file)
         log.info(f"Saved {len(traced_runs)} traced runs")
 
     log.info(f"Saving {len(raw_contacts)} raw contacts to file '{raw_contacts_path}'...")
