@@ -30,7 +30,7 @@ class TranslateRapidProKeys(object):
                 if not remapping.is_activation_message:
                     continue
 
-                if remapping.rapid_pro_key in td:
+                if td.get(remapping.rapid_pro_key) is not None:
                     assert "rqa_message" not in show_dict
                     show_dict["rqa_message"] = td[remapping.rapid_pro_key]
                     show_dict["show_pipeline_key"] = remapping.pipeline_key
@@ -126,7 +126,7 @@ class TranslateRapidProKeys(object):
                 old_key = remapping.rapid_pro_key
                 new_key = remapping.pipeline_key
                 
-                if old_key in td and new_key not in td:
+                if td.get(old_key) is not None and new_key not in td:
                     remapped[new_key] = td[old_key]
 
             td.append_data(remapped, Metadata(user, Metadata.get_call_location(), TimeUtils.utc_now_as_iso_string()))
