@@ -20,18 +20,19 @@ done
 
 
 # Check that the correct number of arguments were provided.
-if [[ $# -ne 4 ]]; then
+if [[ $# -ne 5 ]]; then
     echo "Usage: ./docker-run.sh
     [--profile-cpu <profile-output-path>]
-    <user> <messages-traced-data> <individuals-traced-data> <output-dir>"
+    <user> {bossaso, baidoa} <messages-traced-data> <individuals-traced-data> <output-dir>"
     exit
 fi
 
 # Assign the program arguments to bash variables.
 USER=$1
-INPUT_MESSAGES_TRACED_DATA=$2
-INPUT_INDIVIDUALS_TRACED_DATA=$3
-OUTPUT_DIR=$4
+LOCATION=$2
+INPUT_MESSAGES_TRACED_DATA=$3
+INPUT_INDIVIDUALS_TRACED_DATA=$4
+OUTPUT_DIR=$5
 
 # Build an image for this pipeline stage.
 docker build --build-arg INSTALL_CPU_PROFILER="$PROFILE_CPU" -t "$IMAGE_NAME" .
@@ -42,7 +43,7 @@ if [[ "$PROFILE_CPU" = true ]]; then
     SYS_PTRACE_CAPABILITY="--cap-add SYS_PTRACE"
 fi
 CMD="pipenv run $PROFILE_CPU_CMD python -u generate_analysis_graphs.py \
-    \"$USER\" \
+    \"$USER\" "$LOCATION" \
     /data/messages-traced-data.json /data/individuals-traced-data.json /data/output-graphs \
 "
 container="$(docker container create ${SYS_PTRACE_CAPABILITY} -w /app "$IMAGE_NAME" /bin/bash -c "$CMD")"

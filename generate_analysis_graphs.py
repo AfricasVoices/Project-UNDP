@@ -17,6 +17,8 @@ if __name__ == "__main__":
     parser = argparse.ArgumentParser(description="Generates graphs for analysis")
 
     parser.add_argument("user", help="User launching this program")
+    parser.add_argument("location", choices=["bossaso", "baidoa"],
+                        help="Location the data relates to. Used to select which set of coding plans to use")
     parser.add_argument("messages_json_input_path", metavar="messages-json-input-path",
                         help="Path to a JSONL file to read the TracedData of the messages data from")
     parser.add_argument("individuals_json_input_path", metavar="individuals-json-input-path",
@@ -27,13 +29,18 @@ if __name__ == "__main__":
     args = parser.parse_args()
 
     user = args.user
+    location = args.location
     messages_json_input_path = args.messages_json_input_path
     individuals_json_input_path = args.individuals_json_input_path
     output_dir = args.output_dir
 
-    IOUtils.ensure_dirs_exist(output_dir)
+    if location == "bossaso":
+        PipelineConfiguration.RQA_CODING_PLANS = PipelineConfiguration.BOSSASO_RQA_CODING_PLANS
+    else:
+        assert location == "baidoa"
+        PipelineConfiguration.RQA_CODING_PLANS = PipelineConfiguration.BAIDOA_RQA_CODING_PLANS
 
-    PipelineConfiguration.RQA_CODING_PLANS = PipelineConfiguration.BOSSASO_RQA_CODING_PLANS
+    IOUtils.ensure_dirs_exist(output_dir)
 
     # Read the messages dataset
     log.info(f"Loading the messages dataset from {messages_json_input_path}...")
