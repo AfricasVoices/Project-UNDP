@@ -57,6 +57,7 @@ RUN pipenv sync
 # Copy the rest of the project
 ADD code_schemes/*.json /app/code_schemes/
 ADD src /app/src
+ADD generate_adss_contact_lists.py /app
 ADD fetch_raw_data.py /app
 #ADD fetch_recovered_data.py /app
 #ADD fetch_flow_definitions.py /app
