@@ -17,6 +17,11 @@ class CodeSchemes(object):
     S03E03_BOSSASO_REASONS = _open_scheme("s03e03_bossaso_reasons.json")
     S03E04_BOSSASO_REASONS = _open_scheme("s03e04_bossaso_reasons.json")
 
+    S03E01_BAIDOA_REASONS = _open_scheme("s03e01_baidoa_reasons.json")
+    S03E02_BAIDOA_REASONS = _open_scheme("s03e02_baidoa_reasons.json")
+    S03E03_BAIDOA_REASONS = _open_scheme("s03e03_baidoa_reasons.json")
+    S03E04_BAIDOA_REASONS = _open_scheme("s03e04_baidoa_reasons.json")
+
     MOGADISHU_SUB_DISTRICT = _open_scheme("mogadishu_sub_district.json")
     SOMALIA_DISTRICT = _open_scheme("somalia_district.json")
     SOMALIA_REGION = _open_scheme("somalia_region.json")

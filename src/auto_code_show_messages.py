@@ -13,10 +13,6 @@ log = Logger(__name__)
 
 
 class AutoCodeShowMessages(object):
-    RQA_KEYS = []
-    for plan in PipelineConfiguration.RQA_CODING_PLANS:
-        RQA_KEYS.append(plan.raw_field)
-
     SENT_ON_KEY = "sent_on"
     NOISE_KEY = "noise"
     ICR_MESSAGES_COUNT = 200
@@ -47,7 +43,7 @@ class AutoCodeShowMessages(object):
                       "'FilterTestMessages' was set to false)")
 
         # Filter for runs which don't contain a response to any week's question
-        data = MessageFilters.filter_empty_messages(data, cls.RQA_KEYS)
+        data = MessageFilters.filter_empty_messages(data, [plan.raw_field for plan in PipelineConfiguration.RQA_CODING_PLANS])
 
         # Filter out runs sent outwith the project start and end dates
         data = MessageFilters.filter_time_range(

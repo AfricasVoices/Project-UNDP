@@ -8,7 +8,8 @@ from core_data_modules.util import IOUtils
 from storage.google_cloud import google_cloud_utils
 from storage.google_drive import drive_client_wrapper
 
-from src import CombineRawDatasets, TranslateRapidProKeys, AutoCodeShowMessages, AutoCodeSurveys, ProductionFile
+from src import CombineRawDatasets, TranslateRapidProKeys, AutoCodeShowMessages, AutoCodeSurveys, ProductionFile, \
+    AnalysisFile, ApplyManualCodes
 from src.lib import PipelineConfiguration, MessageFilters
 from src.lib.pipeline_configuration import CodeSchemes
 
@@ -34,9 +35,9 @@ if __name__ == "__main__":
                              "New data will be appended to these files.")
 
     parser.add_argument("messages_json_output_path", metavar="messages-json-output-path",
-                        help="Path to a JSON file to write the TracedData associated with the messages analysis file")
+                        help="Path to a JSONL file to write the TracedData associated with the messages analysis file")
     parser.add_argument("individuals_json_output_path", metavar="individuals-json-output-path",
-                        help="Path to a JSON file to write the TracedData associated with the individuals analysis file")
+                        help="Path to a JSONL file to write the TracedData associated with the individuals analysis file")
     parser.add_argument("icr_output_dir", metavar="icr-output-dir",
                         help="Directory to write CSV files to, each containing 200 messages and message ids for use " 
                              "in inter-code reliability evaluation"),
@@ -86,20 +87,20 @@ if __name__ == "__main__":
     # Load messages
     messages_datasets = []
     for i, activation_flow_name in enumerate(pipeline_configuration.activation_flow_names):
-        raw_activation_path = f"{raw_data_dir}/{activation_flow_name}.json"
+        raw_activation_path = f"{raw_data_dir}/{activation_flow_name}.jsonl"
         log.info(f"Loading {raw_activation_path}...")
         with open(raw_activation_path, "r") as f:
-            messages = TracedDataJsonIO.import_json_to_traced_data_iterable(f)
+            messages = TracedDataJsonIO.import_jsonl_to_traced_data_iterable(f)
         log.info(f"Loaded {len(messages)} messages")
         messages_datasets.append(messages)
 
     log.info("Loading surveys datasets:")
     surveys_datasets = []
     for i, survey_flow_name in enumerate(pipeline_configuration.survey_flow_names):
-        raw_survey_path = f"{raw_data_dir}/{survey_flow_name}.json"
+        raw_survey_path = f"{raw_data_dir}/{survey_flow_name}.jsonl"
         log.info(f"Loading {raw_survey_path}...")
         with open(raw_survey_path, "r") as f:
-            contacts = TracedDataJsonIO.import_json_to_traced_data_iterable(f)
+            contacts = TracedDataJsonIO.import_jsonl_to_traced_data_iterable(f)
         log.info(f"Loaded {len(contacts)} contacts")
         surveys_datasets.append(contacts)
 
@@ -109,6 +110,16 @@ if __name__ == "__main__":
     for dataset in surveys_datasets:
         coalesced_surveys_datasets.append(CombineRawDatasets.coalesce_traced_runs_by_key(user, dataset, "avf_phone_id"))
     data = CombineRawDatasets.combine_raw_datasets(user, messages_datasets, coalesced_surveys_datasets)
+
+    # Infer which RQA coding plans to use from the operator.
+    # This 'hack' is necessary because the rqa coding plans are still not being set in the configuration json.
+    if pipeline_configuration.filter_operator == "golis":
+        log.info("Running in Bossaso mode")
+        PipelineConfiguration.RQA_CODING_PLANS = PipelineConfiguration.BOSSASO_RQA_CODING_PLANS
+    else:
+        assert pipeline_configuration.filter_operator == "hormud", "FilterOperator must be either 'golis' or 'hormud'"
+        log.info("Running in Baidoa mode")
+        PipelineConfiguration.RQA_CODING_PLANS = PipelineConfiguration.BAIDOA_RQA_CODING_PLANS
 
     if pipeline_configuration.filter_operator is not None:
         data = MessageFilters.filter_operator(
@@ -127,26 +138,23 @@ if __name__ == "__main__":
 
     log.info("Auto Coding Surveys...")
     data = AutoCodeSurveys.auto_code_surveys(user, data, coded_dir_path)
-    #
-    # log.info("Applying Manual Codes from Coda...")
-    # data = ApplyManualCodes.apply_manual_codes(user, data, prev_coded_dir_path)
-    #
-    # log.info("Generating Analysis CSVs...")
-    # messages_data, individuals_data = AnalysisFile.generate(user, data, csv_by_message_output_path,
-    #                                                         csv_by_individual_output_path)
 
-    # TODO: Delete when the generate analysis CSVs stage is activated
-    messages_data = data
+    log.info("Applying Manual Codes from Coda...")
+    data = ApplyManualCodes.apply_manual_codes(user, data, prev_coded_dir_path)
+
+    log.info("Generating Analysis CSVs...")
+    messages_data, individuals_data = AnalysisFile.generate(user, data, csv_by_message_output_path,
+                                                            csv_by_individual_output_path)
 
     log.info("Writing messages TracedData to file...")
     IOUtils.ensure_dirs_exist_for_file(messages_json_output_path)
     with open(messages_json_output_path, "w") as f:
-        TracedDataJsonIO.export_traced_data_iterable_to_json(messages_data, f, pretty_print=True)
+        TracedDataJsonIO.export_traced_data_iterable_to_jsonl(messages_data, f)
 
-    # log.info("Writing individuals TracedData to file...")
-    # IOUtils.ensure_dirs_exist_for_file(individuals_json_output_path)
-    # with open(individuals_json_output_path, "w") as f:
-    #     TracedDataJsonIO.export_traced_data_iterable_to_json(individuals_data, f, pretty_print=True)
+    log.info("Writing individuals TracedData to file...")
+    IOUtils.ensure_dirs_exist_for_file(individuals_json_output_path)
+    with open(individuals_json_output_path, "w") as f:
+        TracedDataJsonIO.export_traced_data_iterable_to_jsonl(individuals_data, f)
 
     # Upload to Google Drive, if requested.
     # Note: This should happen as late as possible in order to reduce the risk of the remainder of the pipeline failing
@@ -161,17 +169,17 @@ if __name__ == "__main__":
                                               target_file_name=production_csv_drive_file_name,
                                               target_folder_is_shared_with_me=True)
 
-        # messages_csv_drive_dir = os.path.dirname(pipeline_configuration.drive_upload.messages_upload_path)
-        # messages_csv_drive_file_name = os.path.basename(pipeline_configuration.drive_upload.messages_upload_path)
-        # drive_client_wrapper.update_or_create(csv_by_message_output_path, messages_csv_drive_dir,
-        #                                       target_file_name=messages_csv_drive_file_name,
-        #                                       target_folder_is_shared_with_me=True)
-        #
-        # individuals_csv_drive_dir = os.path.dirname(pipeline_configuration.drive_upload.individuals_upload_path)
-        # individuals_csv_drive_file_name = os.path.basename(pipeline_configuration.drive_upload.individuals_upload_path)
-        # drive_client_wrapper.update_or_create(csv_by_individual_output_path, individuals_csv_drive_dir,
-        #                                       target_file_name=individuals_csv_drive_file_name,
-        #                                       target_folder_is_shared_with_me=True)
+        messages_csv_drive_dir = os.path.dirname(pipeline_configuration.drive_upload.messages_upload_path)
+        messages_csv_drive_file_name = os.path.basename(pipeline_configuration.drive_upload.messages_upload_path)
+        drive_client_wrapper.update_or_create(csv_by_message_output_path, messages_csv_drive_dir,
+                                              target_file_name=messages_csv_drive_file_name,
+                                              target_folder_is_shared_with_me=True)
+
+        individuals_csv_drive_dir = os.path.dirname(pipeline_configuration.drive_upload.individuals_upload_path)
+        individuals_csv_drive_file_name = os.path.basename(pipeline_configuration.drive_upload.individuals_upload_path)
+        drive_client_wrapper.update_or_create(csv_by_individual_output_path, individuals_csv_drive_dir,
+                                              target_file_name=individuals_csv_drive_file_name,
+                                              target_folder_is_shared_with_me=True)
 
         traced_data_drive_dir = os.path.dirname(pipeline_configuration.drive_upload.messages_traced_data_upload_path)
         traced_data_drive_file_name = os.path.basename(
@@ -180,12 +188,12 @@ if __name__ == "__main__":
                                               target_file_name=traced_data_drive_file_name,
                                               target_folder_is_shared_with_me=True)
 
-        # traced_data_drive_dir = os.path.dirname(pipeline_configuration.drive_upload.individuals_traced_data_upload_path)
-        # traced_data_drive_file_name = os.path.basename(
-        #     pipeline_configuration.drive_upload.individuals_traced_data_upload_path)
-        # drive_client_wrapper.update_or_create(individuals_json_output_path, traced_data_drive_dir,
-        #                                       target_file_name=traced_data_drive_file_name,
-        #                                       target_folder_is_shared_with_me=True)
+        traced_data_drive_dir = os.path.dirname(pipeline_configuration.drive_upload.individuals_traced_data_upload_path)
+        traced_data_drive_file_name = os.path.basename(
+            pipeline_configuration.drive_upload.individuals_traced_data_upload_path)
+        drive_client_wrapper.update_or_create(individuals_json_output_path, traced_data_drive_dir,
+                                              target_file_name=traced_data_drive_file_name,
+                                              target_folder_is_shared_with_me=True)
     else:
         log.info("Skipping uploading to Google Drive (because the pipeline configuration json does not contain the key "
                  "'DriveUploadPaths')")

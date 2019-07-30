@@ -2,7 +2,6 @@
   "RapidProDomain": "textit.in",
   "RapidProTokenFileURL": "gs://avf-credentials/csap-text-it-token.txt",
   "ActivationFlowNames": [
-    "csap_s03w01_activation",
     "csap_s03w02_activation"
   ],
   "SurveyFlowNames": [
@@ -23,14 +22,8 @@
   "RapidProKeyRemappings": [
     {"RapidProKey": "avf_phone_id", "PipelineKey": "uid"},
 
-    {"RapidProKey": "Rqa_S03E01 (Text) - csap_s03w01_activation", "PipelineKey": "rqa_s03e01_raw", "IsActivationMessage": true},
-    {"RapidProKey": "Rqa_S03E01 (Run ID) - csap_s03w01_activation", "PipelineKey": "rqa_s03e01_run_id"},
-    {"RapidProKey": "Rqa_S03E01 (Time) - csap_s03w01_activation", "PipelineKey": "sent_on"},
-    {"RapidProKey": "Rqa_S03W01 (Text) - csap_s03w01_activation", "PipelineKey": "rqa_s03e01_raw", "IsActivationMessage": true},
-    {"RapidProKey": "Rqa_S03W01 (Run ID) - csap_s03w01_activation", "PipelineKey": "rqa_s03e01_run_id"},
-    {"RapidProKey": "Rqa_S03W01 (Time) - csap_s03w01_activation", "PipelineKey": "sent_on"},
-    {"RapidProKey": "Rqa_S03W02 (Text) - csap_s03w02_activation", "PipelineKey": "rqa_s03e02_raw", "IsActivationMessage": true},
-    {"RapidProKey": "Rqa_S03W02 (Run ID) - csap_s03w02_activation", "PipelineKey": "rqa_s03e02_run_id"},
+    {"RapidProKey": "Rqa_S03W02 (Text) - csap_s03w02_activation", "PipelineKey": "rqa_s03e01_raw", "IsActivationMessage": true},
+    {"RapidProKey": "Rqa_S03W02 (Run ID) - csap_s03w02_activation", "PipelineKey": "rqa_s03e01_run_id"},
     {"RapidProKey": "Rqa_S03W02 (Time) - csap_s03w02_activation", "PipelineKey": "sent_on"},
 
     {"RapidProKey": "Mog_Sub_District (Text) - csap_demog", "PipelineKey": "location_raw"},
@@ -66,17 +59,17 @@
     {"RapidProKey": "Idp_Camp (Text) - csap_s03_demog", "PipelineKey": "in_idp_camp_raw"},
     {"RapidProKey": "Idp_Camp (Time) - csap_s03_demog", "PipelineKey": "in_idp_camp_time"}
   ],
-  "ProjectStartDate": "2019-07-22T00:00:00+03:00",
+  "ProjectStartDate": "2019-07-29T00:00:00+03:00",
   "ProjectEndDate": "2100-01-01T24:00:00+03:00",
   "FilterTestMessages": true,
-  "FilterOperator": "golis",
+  "FilterOperator": "hormud",
   "DriveUpload": {
     "DriveCredentialsFileURL": "gs://avf-credentials/pipeline-runner-service-acct-avf-data-core-64cc71459fe7.json",
-    "ProductionUploadPath": "undp_rco_analysis_outputs/csap_s03_bossaso_production.csv",
-    "MessagesUploadPath": "undp_rco_analysis_outputs/csap_s03_bossaso_messages.csv",
-    "IndividualsUploadPath": "undp_rco_analysis_outputs/csap_s03_bossaso_individuals.csv",
-    "MessagesTracedDataUploadPath": "undp_rco_analysis_outputs/csap_s03_bossaso_messages_traced_data.jsonl",
-    "IndividualsTracedDataUploadPath": "undp_rco_analysis_outputs/csap_s03_bossaso_individuals_traced_data.jsonl"
+    "ProductionUploadPath": "undp_rco_analysis_outputs/csap_s03_baidoa_production.csv",
+    "MessagesUploadPath": "undp_rco_analysis_outputs/csap_s03_baidoa_messages.csv",
+    "IndividualsUploadPath": "undp_rco_analysis_outputs/csap_s03_baidoa_individuals.csv",
+    "MessagesTracedDataUploadPath": "undp_rco_analysis_outputs/csap_s03_baidoa_messages_traced_data.json",
+    "IndividualsTracedDataUploadPath": "undp_rco_analysis_outputs/csap_s03_baidoa_individuals_traced_data.json"
   },
   "FlowDefinitionsUploadURLPrefix": "gs://avf-flow-definitions-test/UNDP-RCO-test-"
 }
