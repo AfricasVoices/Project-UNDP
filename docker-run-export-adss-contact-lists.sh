@@ -41,7 +41,7 @@ if [[ "$PROFILE_CPU" = true ]]; then
     PROFILE_CPU_CMD="pyflame -o /data/cpu.prof -t"
     SYS_PTRACE_CAPABILITY="--cap-add SYS_PTRACE"
 fi
-CMD="pipenv run $PROFILE_CPU_CMD python -u generate_adss_contact_lists.py \
+CMD="pipenv run $PROFILE_CPU_CMD python -u export_adss_contact_lists.py \
     /data/traced-data.json /data/phone-number-uuid-table.json \
     /data/bossaso-phone-numbers.csv /data/baidoa-phone-numbers.csv
 "
