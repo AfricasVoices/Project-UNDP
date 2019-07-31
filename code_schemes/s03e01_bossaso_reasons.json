@@ -3,7 +3,94 @@
   "Name": "S03E01 Bossaso Reasons",
   "Version": "0.0.0.1",
   "Codes": [
-
+    {
+      "CodeID": "code-dab1616e",
+      "CodeType": "Normal",
+      "DisplayText": "provide health care",
+      "NumericValue": 1,
+      "StringValue": "provide_health_care",
+      "VisibleInCoda": true
+    },
+    {
+      "CodeID": "code-40178574",
+      "CodeType": "Normal",
+      "DisplayText": "education",
+      "NumericValue": 2,
+      "StringValue": "education",
+      "VisibleInCoda": true
+    },
+    {
+      "CodeID": "code-cd04f1d1",
+      "CodeType": "Normal",
+      "DisplayText": "general assistance",
+      "NumericValue": 3,
+      "StringValue": "general_assistance",
+      "VisibleInCoda": true
+    },
+    {
+      "CodeID": "code-ae502bd7",
+      "CodeType": "Normal",
+      "DisplayText": "government should take responsibility for IDPs",
+      "NumericValue": 4,
+      "StringValue": "government_should_take_responsibility_for_IDPs",
+      "VisibleInCoda": true
+    },
+    {
+      "CodeID": "code-75275a44",
+      "CodeType": "Normal",
+      "DisplayText": "current government actions",
+      "NumericValue": 5,
+      "StringValue": "current_government_actions",
+      "VisibleInCoda": true
+    },
+    {
+      "CodeID": "code-5987c6e2",
+      "CodeType": "Normal",
+      "DisplayText": "return IDPs",
+      "NumericValue": 6,
+      "StringValue": "return_IDPs",
+      "VisibleInCoda": true
+    },
+    {
+      "CodeID": "code-d061cd60",
+      "CodeType": "Normal",
+      "DisplayText": "provide houses for the IDPs",
+      "NumericValue": 7,
+      "StringValue": "provide_houses_for_the_IDPs",
+      "VisibleInCoda": true
+    },
+    {
+      "CodeID": "code-3ec85f9f",
+      "CodeType": "Normal",
+      "DisplayText": "peace and security",
+      "NumericValue": 8,
+      "StringValue": "peace_and_security",
+      "VisibleInCoda": true
+    },
+    {
+      "CodeID": "code-d1e5063f",
+      "CodeType": "Normal",
+      "DisplayText": "access to water",
+      "NumericValue": 9,
+      "StringValue": "access_to_water",
+      "VisibleInCoda": true
+    },
+    {
+      "CodeID": "code-3552008f",
+      "CodeType": "Normal",
+      "DisplayText": "job creation",
+      "NumericValue": 10,
+      "StringValue": "job_creation",
+      "VisibleInCoda": true
+    },
+    {
+      "CodeID": "code-9fc719d2",
+      "CodeType": "Normal",
+      "DisplayText": "integration",
+      "NumericValue": 11,
+      "StringValue": "integration",
+      "VisibleInCoda": true
+    },
     {
       "CodeID": "code-NA-f93d3eb7",
       "CodeType": "Control",
