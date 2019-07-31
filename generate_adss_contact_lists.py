@@ -67,7 +67,7 @@ if __name__ == "__main__":
 
     # Export CSVs
     def export_numbers_to_csv(numbers, csv_path):
-        log.info(f"Exporting {len(numbers)} phone numbers to {csv_path}...")
+        log.warning(f"Exporting {len(numbers)} phone numbers to {csv_path}...")
         with open(csv_path, "w") as f:
             writer = csv.DictWriter(f, fieldnames=["URN:Tel", "Name"], lineterminator="\n")
             writer.writeheader()
