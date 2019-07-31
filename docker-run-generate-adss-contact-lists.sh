@@ -43,7 +43,7 @@ if [[ "$PROFILE_CPU" = true ]]; then
 fi
 CMD="pipenv run $PROFILE_CPU_CMD python -u generate_adss_contact_lists.py \
     /data/traced-data.json /data/phone-number-uuid-table.json \
-    /data/bossaso.csv /data/baidoa.csv
+    /data/bossaso-phone-numbers.csv /data/baidoa-phone-numbers.csv
 "
 container="$(docker container create ${SYS_PTRACE_CAPABILITY} -w /app "$IMAGE_NAME" /bin/bash -c "$CMD")"
 
@@ -55,8 +55,8 @@ docker cp "$INPUT_PHONE_NUMBER_UUID_TABLE" "$container:/data/phone-number-uuid-t
 docker start -a -i "$container"
 
 # Copy the output data back out of the container
-docker cp "$container:/data/bossaso.csv" "$OUTPUT_BOSSASO"
-docker cp "$container:/data/baidoa.csv" "$OUTPUT_BAIDOA"
+docker cp "$container:/data/bossaso-phone-numbers.csv" "$OUTPUT_BOSSASO"
+docker cp "$container:/data/baidoa-phone-numbers.csv" "$OUTPUT_BAIDOA"
 
 if [[ "$PROFILE_CPU" = true ]]; then
     mkdir -p "$(dirname "$CPU_PROFILE_OUTPUT_PATH")"
