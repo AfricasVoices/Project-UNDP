@@ -3,7 +3,94 @@
   "Name": "S03E01 Baidoa Reasons",
   "Version": "0.0.0.1",
   "Codes": [
-
+    {
+      "CodeID": "code-0a778da3",
+      "CodeType": "Normal",
+      "DisplayText": "provision of assistance from the government",
+      "NumericValue": 1,
+      "StringValue": "provision_of_assistance_from_the_government",
+      "VisibleInCoda": true
+    },
+    {
+      "CodeID": "code-6419345b",
+      "CodeType": "Normal",
+      "DisplayText": "returns",
+      "NumericValue": 2,
+      "StringValue": "returns",
+      "VisibleInCoda": true
+    },
+    {
+      "CodeID": "code-f3441241",
+      "CodeType": "Normal",
+      "DisplayText": "resettlement",
+      "NumericValue": 3,
+      "StringValue": "resettlement",
+      "VisibleInCoda": true
+    },
+    {
+      "CodeID": "code-606bea76",
+      "CodeType": "Normal",
+      "DisplayText": "education",
+      "NumericValue": 4,
+      "StringValue": "education",
+      "VisibleInCoda": true
+    },
+    {
+      "CodeID": "code-bdc59347",
+      "CodeType": "Normal",
+      "DisplayText": "job creation",
+      "NumericValue": 5,
+      "StringValue": "job_creation",
+      "VisibleInCoda": true
+    },
+    {
+      "CodeID": "code-0fea1494",
+      "CodeType": "Normal",
+      "DisplayText": "food and water",
+      "NumericValue": 6,
+      "StringValue": "food_and_water",
+      "VisibleInCoda": true
+    },
+    {
+      "CodeID": "code-4933b76e",
+      "CodeType": "Normal",
+      "DisplayText": "housing",
+      "NumericValue": 7,
+      "StringValue": "housing",
+      "VisibleInCoda": true
+    },
+    {
+      "CodeID": "code-c9c4251d",
+      "CodeType": "Normal",
+      "DisplayText": "provision of health",
+      "NumericValue": 8,
+      "StringValue": "provision_of_health",
+      "VisibleInCoda": true
+    },
+    {
+      "CodeID": "code-0d60298d",
+      "CodeType": "Normal",
+      "DisplayText": "current government actions",
+      "NumericValue": 9,
+      "StringValue": "current_government_actions",
+      "VisibleInCoda": true
+    },
+    {
+      "CodeID": "code-95b0e274",
+      "CodeType": "Normal",
+      "DisplayText": "peace and security",
+      "NumericValue": 10,
+      "StringValue": "peace_and_security",
+      "VisibleInCoda": true
+    },
+    {
+      "CodeID": "code-619721cf",
+      "CodeType": "Normal",
+      "DisplayText": "other",
+      "NumericValue": 11,
+      "StringValue": "other",
+      "VisibleInCoda": true
+    },
     {
       "CodeID": "code-NA-f93d3eb7",
       "CodeType": "Control",
