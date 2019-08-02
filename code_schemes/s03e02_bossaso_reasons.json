@@ -76,6 +76,14 @@
       "VisibleInCoda": true
     },
     {
+      "CodeID": "code-0491ccf6",
+      "CodeType": "Normal",
+      "DisplayText": "other",
+      "NumericValue": 10,
+      "StringValue": "other",
+      "VisibleInCoda": true
+    },
+    {
       "CodeID": "code-NA-f93d3eb7",
       "CodeType": "Control",
       "ControlCode": "NA",
