@@ -304,6 +304,43 @@ class PipelineConfiguration(object):
                            folding_mode=FoldingModes.ASSERT_EQUAL
                        )
                    ],
+                   raw_field_folding_mode=FoldingModes.ASSERT_EQUAL),
+
+        CodingPlan(raw_field="have_voice_raw",
+                   time_field="have_voice_time",
+                   coda_filename="have_voice.json",
+                   coding_configurations=[
+                       CodingConfiguration(
+                           coding_mode=CodingModes.SINGLE,
+                           code_scheme=CodeSchemes.HAVE_VOICE_YES_NO_AMB,
+                           cleaner=somali.DemographicCleaner.clean_yes_no,
+                           coded_field="have_voice_yes_no_amb_coded",
+                           analysis_file_key="have_voice_yes_no_amb",
+                           folding_mode=FoldingModes.ASSERT_EQUAL
+                       ),
+                       CodingConfiguration(
+                           coding_mode=CodingModes.MULTIPLE,
+                           code_scheme=CodeSchemes.HAVE_VOICE_REASONS,
+                           coded_field="have_voice_reasons_coded",
+                           analysis_file_key="have_voice_reasons_",
+                           folding_mode=FoldingModes.MATRIX
+                       )
+                   ],
+                   raw_field_folding_mode=FoldingModes.ASSERT_EQUAL),
+
+        CodingPlan(raw_field="more_included_raw",
+                   time_field="more_included_time",
+                   coda_filename="more_included.json",
+                   coding_configurations=[
+                       CodingConfiguration(
+                           coding_mode=CodingModes.MULTIPLE,
+                           code_scheme=CodeSchemes.MORE_INCLUDED_REASONS,
+                           cleaner=somali.DemographicCleaner.clean_yes_no,
+                           coded_field="more_included_coded",
+                           analysis_file_key="more_included_",
+                           folding_mode=FoldingModes.MATRIX
+                       )
+                   ],
                    raw_field_folding_mode=FoldingModes.ASSERT_EQUAL)
     ]
 

@@ -31,3 +31,7 @@ class CodeSchemes(object):
     AGE = _open_scheme("age.json")
     RECENTLY_DISPLACED = _open_scheme("recently_displaced.json")
     IN_IDP_CAMP = _open_scheme("in_idp_camp.json")
+
+    HAVE_VOICE_YES_NO_AMB = _open_scheme("have_voice_yes_no_amb.json")
+    HAVE_VOICE_REASONS = _open_scheme("have_voice_reasons.json")
+    MORE_INCLUDED_REASONS = _open_scheme("more_included_reasons.json")
