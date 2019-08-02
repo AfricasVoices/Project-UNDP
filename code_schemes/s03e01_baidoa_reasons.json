@@ -6,9 +6,9 @@
     {
       "CodeID": "code-0a778da3",
       "CodeType": "Normal",
-      "DisplayText": "provision of assistance from the government",
+      "DisplayText": "general assistance",
       "NumericValue": 1,
-      "StringValue": "provision_of_assistance_from_the_government",
+      "StringValue": "general_assistance",
       "VisibleInCoda": true
     },
     {
