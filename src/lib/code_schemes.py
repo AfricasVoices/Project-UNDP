@@ -31,3 +31,5 @@ class CodeSchemes(object):
     AGE = _open_scheme("age.json")
     RECENTLY_DISPLACED = _open_scheme("recently_displaced.json")
     IN_IDP_CAMP = _open_scheme("in_idp_camp.json")
+
+    WS_CORRECT_DATASET = _open_scheme("ws_correct_dataset.json")
