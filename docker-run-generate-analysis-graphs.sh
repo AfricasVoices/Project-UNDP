@@ -44,13 +44,13 @@ if [[ "$PROFILE_CPU" = true ]]; then
 fi
 CMD="pipenv run $PROFILE_CPU_CMD python -u generate_analysis_graphs.py \
     \"$USER\" "$LOCATION" \
-    /data/messages-traced-data.json /data/individuals-traced-data.json /data/output-graphs \
+    /data/messages-traced-data.jsonl /data/individuals-traced-data.jsonl /data/output-graphs \
 "
 container="$(docker container create ${SYS_PTRACE_CAPABILITY} -w /app "$IMAGE_NAME" /bin/bash -c "$CMD")"
 
 # Copy input data into the container
-docker cp "$INPUT_MESSAGES_TRACED_DATA" "$container:/data/messages-traced-data.json"
-docker cp "$INPUT_INDIVIDUALS_TRACED_DATA" "$container:/data/individuals-traced-data.json"
+docker cp "$INPUT_MESSAGES_TRACED_DATA" "$container:/data/messages-traced-data.jsonl"
+docker cp "$INPUT_INDIVIDUALS_TRACED_DATA" "$container:/data/individuals-traced-data.jsonl"
 
 # Run the container
 docker start -a -i "$container"
