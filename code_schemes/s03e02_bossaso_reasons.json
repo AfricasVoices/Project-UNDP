@@ -3,7 +3,86 @@
   "Name": "S03E02 Bossaso Reasons",
   "Version": "0.0.0.1",
   "Codes": [
-
+    {
+      "CodeID": "code-b038515b",
+      "CodeType": "Normal",
+      "DisplayText": "IDPs to create businesses",
+      "NumericValue": 1,
+      "StringValue": "IDPs_to_create_businesses",
+      "VisibleInCoda": true
+    },
+    {
+      "CodeID": "code-fdef241d",
+      "CodeType": "Normal",
+      "DisplayText": "IDPs are too vulnerable to contribute",
+      "NumericValue": 2,
+      "StringValue": "IDPs_are_too_vulnerable_to_contribute",
+      "VisibleInCoda": true
+    },
+    {
+      "CodeID": "code-9ab0a13d",
+      "CodeType": "Normal",
+      "DisplayText": "financial assistance",
+      "NumericValue": 3,
+      "StringValue": "financial_assistance",
+      "VisibleInCoda": true
+    },
+    {
+      "CodeID": "code-ee186dae",
+      "CodeType": "Normal",
+      "DisplayText": "jobs creation",
+      "NumericValue": 4,
+      "StringValue": "jobs_creation",
+      "VisibleInCoda": true
+    },
+    {
+      "CodeID": "code-3aa38b11",
+      "CodeType": "Normal",
+      "DisplayText": "social integration",
+      "NumericValue": 5,
+      "StringValue": "social_integration",
+      "VisibleInCoda": true
+    },
+    {
+      "CodeID": "code-1f4260ee",
+      "CodeType": "Normal",
+      "DisplayText": "peace and security is needed",
+      "NumericValue": 6,
+      "StringValue": "peace_and_security_is_needed",
+      "VisibleInCoda": true
+    },
+    {
+      "CodeID": "code-b69e545a",
+      "CodeType": "Normal",
+      "DisplayText": "tax payment",
+      "NumericValue": 7,
+      "StringValue": "tax_payment",
+      "VisibleInCoda": true
+    },
+    {
+      "CodeID": "code-d78241c5",
+      "CodeType": "Normal",
+      "DisplayText": "provide skills training",
+      "NumericValue": 8,
+      "StringValue": "provide_skills_training",
+      "VisibleInCoda": true
+    },
+    {
+      "CodeID": "code-fd4f0abf",
+      "CodeType": "Normal",
+      "DisplayText": "current economic contribution of IDPs",
+      "NumericValue": 9,
+      "StringValue": "current_economic_contribution_of_IDPs",
+      "VisibleInCoda": true
+    },
+    {
+      "CodeID": "code-0491ccf6",
+      "CodeType": "Normal",
+      "DisplayText": "other",
+      "NumericValue": 10,
+      "StringValue": "other",
+      "VisibleInCoda": true
+    },
     {
       "CodeID": "code-NA-f93d3eb7",
       "CodeType": "Control",
