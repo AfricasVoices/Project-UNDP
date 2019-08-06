@@ -3,7 +3,8 @@
   "RapidProTokenFileURL": "gs://avf-credentials/csap-text-it-token.txt",
   "ActivationFlowNames": [
     "csap_s03w01_activation",
-    "csap_s03w02_activation"
+    "csap_s03w02_activation",
+    "csap_s03w03_activation"
   ],
   "SurveyFlowNames": [
     "csap_demog",
@@ -32,6 +33,9 @@
     {"RapidProKey": "Rqa_S03W02 (Text) - csap_s03w02_activation", "PipelineKey": "rqa_s03e02_raw", "IsActivationMessage": true},
     {"RapidProKey": "Rqa_S03W02 (Run ID) - csap_s03w02_activation", "PipelineKey": "rqa_s03e02_run_id"},
     {"RapidProKey": "Rqa_S03W02 (Time) - csap_s03w02_activation", "PipelineKey": "sent_on"},
+    {"RapidProKey": "Rqa_S03W03 (Text) - csap_s03w03_activation", "PipelineKey": "rqa_s03e03_raw", "IsActivationMessage": true},
+    {"RapidProKey": "Rqa_S03W03 (Run ID) - csap_s03w03_activation", "PipelineKey": "rqa_s03e03_run_id"},
+    {"RapidProKey": "Rqa_S03W03 (Time) - csap_s03w03_activation", "PipelineKey": "sent_on"},
 
     {"RapidProKey": "Mog_Sub_District (Text) - csap_demog", "PipelineKey": "location_raw"},
     {"RapidProKey": "Mog_Sub_District (Time) - csap_demog", "PipelineKey": "location_time"},
