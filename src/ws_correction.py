@@ -109,7 +109,12 @@ class WSCorrection(object):
                     continue
                 ws_code = CodeSchemes.WS_CORRECT_DATASET.get_code_with_id(td[f"{plan.raw_field}_WS_correct_dataset"]["CodeID"])
                 if ws_code.code_type == "Normal":
-                    survey_moves[plan.raw_field] = ws_code_to_raw_field_map[ws_code.code_id]
+                    if ws_code.code_id in ws_code_to_raw_field_map:
+                        survey_moves[plan.raw_field] = ws_code_to_raw_field_map[ws_code.code_id]
+                    else:
+                        log.warning(f"Found a WS - Correct Dataset code with no matching coding plan (the code has "
+                                    f"CodeID '{ws_code.code_id}' and DisplayText '{ws_code.display_text}')")
+                        survey_moves[plan.raw_field] = None
 
             # Find all the RQA data being moved.
             rqa_moves = dict()  # of (index in group, source_field) -> target_field
@@ -119,7 +124,12 @@ class WSCorrection(object):
                         continue
                     ws_code = CodeSchemes.WS_CORRECT_DATASET.get_code_with_id(td[f"{plan.raw_field}_WS_correct_dataset"]["CodeID"])
                     if ws_code.code_type == "Normal":
-                        rqa_moves[(i, plan.raw_field)] = ws_code_to_raw_field_map[ws_code.code_id]
+                        if ws_code.code_id in ws_code_to_raw_field_map:
+                            rqa_moves[(i, plan.raw_field)] = ws_code_to_raw_field_map[ws_code.code_id]
+                        else:
+                            log.warning(f"Found a WS - Correct Dataset code with no matching coding plan (the code has "
+                                        f"CodeID '{ws_code.code_id}' and DisplayText '{ws_code.display_text}')")
+                            rqa_moves[(i, plan.raw_field)] = None
 
             # Build a dictionary of the survey fields that haven't been moved, and cleared fields for those which have.
             survey_updates = dict()  # of raw_field -> updated value
@@ -149,7 +159,11 @@ class WSCorrection(object):
             for plan in PipelineConfiguration.SURVEY_CODING_PLANS + PipelineConfiguration.RQA_CODING_PLANS:
                 if plan.raw_field not in survey_moves:
                     continue
+                    
                 target_field = survey_moves[plan.raw_field]
+                if target_field is None:
+                    continue
+                    
                 update = _WSUpdate(td[plan.raw_field], td[plan.time_field], plan.raw_field)
                 if target_field in raw_survey_fields:
                     survey_updates[target_field] = survey_updates.get(target_field, []) + [update]
@@ -159,6 +173,9 @@ class WSCorrection(object):
 
             # Add data moving from survey fields to the relevant survey_/rqa_updates
             for (i, source_field), target_field in rqa_moves.items():
+                if target_field is None:
+                    continue
+
                 for plan in PipelineConfiguration.SURVEY_CODING_PLANS + PipelineConfiguration.RQA_CODING_PLANS:
                     if plan.raw_field == source_field:
                         _td = group[i]
