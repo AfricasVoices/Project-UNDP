@@ -130,6 +130,9 @@ if __name__ == "__main__":
     log.info("Translating Rapid Pro Keys...")
     data = TranslateRapidProKeys.translate_rapid_pro_keys(user, data, pipeline_configuration, prev_coded_dir_path)
 
+    log.info("Redirecting WS messages...")
+    # data = WSCorrection.move_wrong_scheme_messages(user, data, prev_coded_dir_path)
+
     log.info("Auto Coding Messages...")
     data = AutoCodeShowMessages.auto_code_show_messages(user, data, pipeline_configuration, icr_output_dir, coded_dir_path)
 
