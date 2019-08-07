@@ -170,7 +170,7 @@ class WSCorrection(object):
                     assert target_field in raw_rqa_fields, f"Raw field '{target_field}' not in any coding plan"
                     rqa_updates.append((target_field, update))
 
-            # Add data moving from survey fields to the relevant survey_/rqa_updates
+            # Add data moving from RQA fields to the relevant survey_/rqa_updates
             for (i, source_field), target_field in rqa_moves.items():
                 if target_field is None:
                     continue
