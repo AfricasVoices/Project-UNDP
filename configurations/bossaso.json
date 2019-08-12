@@ -4,7 +4,8 @@
   "ActivationFlowNames": [
     "csap_s03w01_activation",
     "csap_s03w02_activation",
-    "csap_s03w03_activation"
+    "csap_s03w03_activation",
+    "csap_s03w04_activation"
   ],
   "SurveyFlowNames": [
     "csap_demog",
