@@ -3,7 +3,70 @@
   "Name": "S03E02 Baidoa Reasons",
   "Version": "0.0.0.1",
   "Codes": [
-
+    {
+      "CodeID": "code-89c0b46c",
+      "CodeType": "Normal",
+      "DisplayText": "no impact",
+      "NumericValue": 1,
+      "StringValue": "no_impact",
+      "VisibleInCoda": true
+    },
+    {
+      "CodeID": "code-6c506559",
+      "CodeType": "Normal",
+      "DisplayText": "insecurity",
+      "NumericValue": 2,
+      "StringValue": "insecurity",
+      "VisibleInCoda": true
+    },
+    {
+      "CodeID": "code-8620fffd",
+      "CodeType": "Normal",
+      "DisplayText": "return IDPs",
+      "NumericValue": 3,
+      "StringValue": "return_IDPs",
+      "VisibleInCoda": true
+    },
+    {
+      "CodeID": "code-c3189e3d",
+      "CodeType": "Normal",
+      "DisplayText": "economic development",
+      "NumericValue": 4,
+      "StringValue": "economic_development",
+      "VisibleInCoda": true
+    },
+    {
+      "CodeID": "code-09633d4e",
+      "CodeType": "Normal",
+      "DisplayText": "poor hygiene",
+      "NumericValue": 5,
+      "StringValue": "poor_hygiene",
+      "VisibleInCoda": true
+    },
+    {
+      "CodeID": "code-59fc9791",
+      "CodeType": "Normal",
+      "DisplayText": "integration",
+      "NumericValue": 6,
+      "StringValue": "integration",
+      "VisibleInCoda": true
+    },
+    {
+      "CodeID": "code-606e8be0",
+      "CodeType": "Normal",
+      "DisplayText": "overcrowding",
+      "NumericValue": 7,
+      "StringValue": "overcrowding",
+      "VisibleInCoda": true
+    },
+    {
+      "CodeID": "code-bedf3342",
+      "CodeType": "Normal",
+      "DisplayText": "other",
+      "NumericValue": 8,
+      "StringValue": "other",
+      "VisibleInCoda": true
+    },
     {
       "CodeID": "code-NA-f93d3eb7",
       "CodeType": "Control",
