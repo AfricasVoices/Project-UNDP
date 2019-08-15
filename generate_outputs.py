@@ -140,7 +140,7 @@ if __name__ == "__main__":
     data = ProductionFile.generate(data, production_csv_output_path)
 
     log.info("Auto Coding Surveys...")
-    data = AutoCodeSurveys.auto_code_surveys(user, data, coded_dir_path)
+    data = AutoCodeSurveys.auto_code_surveys(user, data, pipeline_configuration, coded_dir_path)
 
     log.info("Applying Manual Codes from Coda...")
     data = ApplyManualCodes.apply_manual_codes(user, data, prev_coded_dir_path)
