@@ -326,6 +326,7 @@ class PipelineConfiguration(object):
                            folding_mode=FoldingModes.MATRIX
                        )
                    ],
+                   code_imputation_function=code_imputation_functions.impute_yes_no_reasons_codes,
                    raw_field_folding_mode=FoldingModes.ASSERT_EQUAL),
 
         CodingPlan(raw_field="more_included_raw",
