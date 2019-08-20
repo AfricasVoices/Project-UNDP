@@ -1,63 +1,43 @@
 {
-  "SchemeID": "Scheme-1cc441c8",
-  "Name": "S03E04 Bossaso Reasons",
+  "SchemeID": "Scheme-539ec95d",
+  "Name": "Have Voice Yes/No/Amb",
   "Version": "0.0.0.1",
   "Codes": [
     {
-      "CodeID": "code-db6c715b",
+      "CodeID": "code-9b0ce06c",
       "CodeType": "Normal",
-      "DisplayText": "availability of services",
-      "NumericValue": 0,
-      "StringValue": "availability_of_services",
-      "VisibleInCoda": true
-    },
-    {
-      "CodeID": "code-0c8334c4",
-      "CodeType": "Normal",
-      "DisplayText": "economic opportunities",
+      "DisplayText": "yes",
       "NumericValue": 1,
-      "StringValue": "economic_opportunities",
-      "VisibleInCoda": true
+      "StringValue": "yes",
+      "Shortcut": "y",
+      "VisibleInCoda": true,
+      "MatchValues": [
+        "yes"
+      ]
     },
     {
-      "CodeID": "code-3c20afaa",
+      "CodeID": "code-53e36168",
       "CodeType": "Normal",
-      "DisplayText": "better quality of life",
+      "DisplayText": "no",
+      "Shortcut": "n",
       "NumericValue": 2,
-      "StringValue": "better_quality_of_life",
-      "VisibleInCoda": true
+      "StringValue": "no",
+      "VisibleInCoda": true,
+      "MatchValues": [
+        "no"
+      ]
     },
     {
-      "CodeID": "code-b79a1c1a",
+      "CodeID": "code-93791adf",
       "CodeType": "Normal",
-      "DisplayText": "lack of security",
-      "NumericValue": 2,
-      "StringValue": "lack_of_security",
-      "VisibleInCoda": true
-    },
-    {
-      "CodeID": "code-50ac5410",
-      "CodeType": "Normal",
-      "DisplayText": "nothing to return to",
+      "DisplayText": "ambivalent",
+      "Shortcut": "a",
       "NumericValue": 3,
-      "StringValue": "nothing_to_return_to",
-      "VisibleInCoda": true
-    },
-    {
-      "CodeID": "code-4cebbd42",
-      "CodeType": "Normal",
-      "DisplayText": "lack of services",
-      "NumericValue": 4,
-      "StringValue": "lack_of_services",
-      "VisibleInCoda": true
-    },
-    {
-      "CodeID": "code-c234cc24",
-      "CodeType": "Normal",
-      "DisplayText": "other",
-      "NumericValue": 5,
-      "StringValue": "other",
-      "VisibleInCoda": true
+      "StringValue": "ambivalent",
+      "VisibleInCoda": true,
+      "MatchValues": [
+        "ambivalent"
+      ]
     },
     {
       "CodeID": "code-NA-f93d3eb7",
@@ -130,30 +110,6 @@
       "NumericValue": -110,
       "StringValue": "CE",
       "VisibleInCoda": false
-    },
-     {
-      "CodeID": "code-PB-a434a800",
-      "CodeType": "Meta",
-      "DisplayText": "push back",
-      "NumericValue": -100000,
-      "StringValue": "push_back",
-      "VisibleInCoda": true
-    },
-    {
-      "CodeID": "code-Q-a5d3700d",
-      "CodeType": "Meta",
-      "DisplayText": "question",
-      "NumericValue": -100010,
-      "StringValue": "question",
-      "VisibleInCoda": true
-    },
-    {
-      "CodeID": "code-G-97cb3199",
-      "CodeType": "Meta",
-      "DisplayText": "greeting",
-      "NumericValue": -100020,
-      "StringValue": "greeting",
-      "VisibleInCoda": true
     }
   ]
 }
