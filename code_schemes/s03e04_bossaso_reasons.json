@@ -31,7 +31,7 @@
       "CodeID": "code-b79a1c1a",
       "CodeType": "Normal",
       "DisplayText": "lack of security",
-      "NumericValue": 2,
+      "NumericValue": 3,
       "StringValue": "lack_of_security",
       "VisibleInCoda": true
     },
@@ -39,7 +39,7 @@
       "CodeID": "code-50ac5410",
       "CodeType": "Normal",
       "DisplayText": "nothing to return to",
-      "NumericValue": 3,
+      "NumericValue": 4,
       "StringValue": "nothing_to_return_to",
       "VisibleInCoda": true
     },
@@ -47,7 +47,7 @@
       "CodeID": "code-4cebbd42",
       "CodeType": "Normal",
       "DisplayText": "lack of services",
-      "NumericValue": 4,
+      "NumericValue": 5,
       "StringValue": "lack_of_services",
       "VisibleInCoda": true
     },
@@ -55,7 +55,7 @@
       "CodeID": "code-c234cc24",
       "CodeType": "Normal",
       "DisplayText": "other",
-      "NumericValue": 5,
+      "NumericValue": 6,
       "StringValue": "other",
       "VisibleInCoda": true
     },
