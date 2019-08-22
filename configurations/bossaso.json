@@ -4,7 +4,8 @@
   "ActivationFlowNames": [
     "csap_s03w01_activation",
     "csap_s03w02_activation",
-    "csap_s03w03_activation"
+    "csap_s03w03_activation",
+    "csap_s03w04_activation"
   ],
   "SurveyFlowNames": [
     "csap_demog",
@@ -74,7 +75,7 @@
     {"RapidProKey": "Idp_Camp (Time) - csap_s03_demog", "PipelineKey": "in_idp_camp_time"}
   ],
   "ProjectStartDate": "2019-07-22T00:00:00+03:00",
-  "ProjectEndDate": "2100-01-01T24:00:00+03:00",
+  "ProjectEndDate": "2019-08-18T24:00:00+03:00",
   "FilterTestMessages": true,
   "FilterOperator": "golis",
   "DriveUpload": {

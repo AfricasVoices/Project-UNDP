@@ -1,48 +1,9 @@
 {
-  "SchemeID": "Scheme-cc66e06d",
-  "Name": "S03E03 Bossaso Reasons",
+  "SchemeID": "Scheme-6040651b",
+  "Name": "Have Voice Reasons",
   "Version": "0.0.0.1",
   "Codes": [
-    {
-      "CodeID": "code-fe803bed",
-      "CodeType": "Normal",
-      "DisplayText": "long term contracts",
-      "NumericValue": 1,
-      "StringValue": "long_term_contracts",
-      "VisibleInCoda": true
-    },
-    {
-      "CodeID": "code-fce541db",
-      "CodeType": "Normal",
-      "DisplayText": "permanent land allocation",
-      "NumericValue": 2,
-      "StringValue": "permanent_land_allocation",
-      "VisibleInCoda": true
-    },
-    {
-      "CodeID": "code-ed3f490a",
-      "CodeType": "Normal",
-      "DisplayText": "land with services",
-      "NumericValue": 3,
-      "StringValue": "land_with_services",
-      "VisibleInCoda": true
-    },
-    {
-      "CodeID": "code-bd3bca0f",
-      "CodeType": "Normal",
-      "DisplayText": "government owned land",
-      "NumericValue": 4,
-      "StringValue": "government_owned_land",
-      "VisibleInCoda": true
-    },
-    {
-      "CodeID": "code-7dd6c670",
-      "CodeType": "Normal",
-      "DisplayText": "other",
-      "NumericValue": 5,
-      "StringValue": "other",
-      "VisibleInCoda": true
-    },
+
     {
       "CodeID": "code-NA-f93d3eb7",
       "CodeType": "Control",

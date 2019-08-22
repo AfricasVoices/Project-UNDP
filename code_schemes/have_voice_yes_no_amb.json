@@ -1,47 +1,43 @@
 {
-  "SchemeID": "Scheme-cc66e06d",
-  "Name": "S03E03 Bossaso Reasons",
+  "SchemeID": "Scheme-539ec95d",
+  "Name": "Have Voice Yes/No/Amb",
   "Version": "0.0.0.1",
   "Codes": [
     {
-      "CodeID": "code-fe803bed",
+      "CodeID": "code-9b0ce06c",
       "CodeType": "Normal",
-      "DisplayText": "long term contracts",
+      "DisplayText": "yes",
       "NumericValue": 1,
-      "StringValue": "long_term_contracts",
-      "VisibleInCoda": true
+      "StringValue": "yes",
+      "Shortcut": "y",
+      "VisibleInCoda": true,
+      "MatchValues": [
+        "yes"
+      ]
     },
     {
-      "CodeID": "code-fce541db",
+      "CodeID": "code-53e36168",
       "CodeType": "Normal",
-      "DisplayText": "permanent land allocation",
+      "DisplayText": "no",
+      "Shortcut": "n",
       "NumericValue": 2,
-      "StringValue": "permanent_land_allocation",
-      "VisibleInCoda": true
+      "StringValue": "no",
+      "VisibleInCoda": true,
+      "MatchValues": [
+        "no"
+      ]
     },
     {
-      "CodeID": "code-ed3f490a",
+      "CodeID": "code-93791adf",
       "CodeType": "Normal",
-      "DisplayText": "land with services",
+      "DisplayText": "ambivalent",
+      "Shortcut": "a",
       "NumericValue": 3,
-      "StringValue": "land_with_services",
-      "VisibleInCoda": true
-    },
-    {
-      "CodeID": "code-bd3bca0f",
-      "CodeType": "Normal",
-      "DisplayText": "government owned land",
-      "NumericValue": 4,
-      "StringValue": "government_owned_land",
-      "VisibleInCoda": true
-    },
-    {
-      "CodeID": "code-7dd6c670",
-      "CodeType": "Normal",
-      "DisplayText": "other",
-      "NumericValue": 5,
-      "StringValue": "other",
-      "VisibleInCoda": true
+      "StringValue": "ambivalent",
+      "VisibleInCoda": true,
+      "MatchValues": [
+        "ambivalent"
+      ]
     },
     {
       "CodeID": "code-NA-f93d3eb7",
