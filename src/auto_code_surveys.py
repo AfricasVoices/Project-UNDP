@@ -28,7 +28,8 @@ class AutoCodeSurveys(object):
                                                                         cc.cleaner, cc.code_scheme)
 
         # Remove survey data sent after the project finished
-        log.info("Removing survey messages sent after the end of the project")
+        log.info("Hiding survey messages sent after the end of the project. These will not be exported in "
+                 "production/analysis files")
         out_of_range_count = 0
         for td in data:
             for plan in PipelineConfiguration.SURVEY_CODING_PLANS:
@@ -36,7 +37,7 @@ class AutoCodeSurveys(object):
                     out_of_range_count += 1
                     td.hide_keys({plan.raw_field, plan.time_field},
                                  Metadata(user, Metadata.get_call_location(), time.time()))
-        log.info(f"Removed {out_of_range_count} survey messages sent after the end of the project")
+        log.info(f"Hid {out_of_range_count} survey messages sent after the end of the project")
 
         # For any locations where the cleaners assigned a code to a sub district, set the district code to NC
         # (this is because only one column should have a value set in Coda)
