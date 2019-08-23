@@ -3,7 +3,9 @@
   "RapidProTokenFileURL": "gs://avf-credentials/csap-text-it-token.txt",
   "ActivationFlowNames": [
     "csap_s03w01_activation",
-    "csap_s03w02_activation"
+    "csap_s03w02_activation",
+    "csap_s03w03_activation",
+    "csap_s03w04_activation"
   ],
   "SurveyFlowNames": [
     "csap_demog",
@@ -32,6 +34,12 @@
     {"RapidProKey": "Rqa_S03W02 (Text) - csap_s03w02_activation", "PipelineKey": "rqa_s03e02_raw", "IsActivationMessage": true},
     {"RapidProKey": "Rqa_S03W02 (Run ID) - csap_s03w02_activation", "PipelineKey": "rqa_s03e02_run_id"},
     {"RapidProKey": "Rqa_S03W02 (Time) - csap_s03w02_activation", "PipelineKey": "sent_on"},
+    {"RapidProKey": "Rqa_S03W03 (Text) - csap_s03w03_activation", "PipelineKey": "rqa_s03e03_raw", "IsActivationMessage": true},
+    {"RapidProKey": "Rqa_S03W03 (Run ID) - csap_s03w03_activation", "PipelineKey": "rqa_s03e03_run_id"},
+    {"RapidProKey": "Rqa_S03W03 (Time) - csap_s03w03_activation", "PipelineKey": "sent_on"},
+    {"RapidProKey": "Rqa_S03W04 (Text) - csap_s03w04_activation", "PipelineKey": "rqa_s03e04_raw", "IsActivationMessage": true},
+    {"RapidProKey": "Rqa_S03W04 (Run ID) - csap_s03w04_activation", "PipelineKey": "rqa_s03e04_run_id"},
+    {"RapidProKey": "Rqa_S03W04 (Time) - csap_s03w04_activation", "PipelineKey": "sent_on"},
 
     {"RapidProKey": "Mog_Sub_District (Text) - csap_demog", "PipelineKey": "location_raw"},
     {"RapidProKey": "Mog_Sub_District (Time) - csap_demog", "PipelineKey": "location_time"},
@@ -67,7 +75,7 @@
     {"RapidProKey": "Idp_Camp (Time) - csap_s03_demog", "PipelineKey": "in_idp_camp_time"}
   ],
   "ProjectStartDate": "2019-07-22T00:00:00+03:00",
-  "ProjectEndDate": "2100-01-01T24:00:00+03:00",
+  "ProjectEndDate": "2019-08-18T24:00:00+03:00",
   "FilterTestMessages": true,
   "FilterOperator": "golis",
   "DriveUpload": {

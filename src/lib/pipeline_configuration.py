@@ -35,8 +35,8 @@ class CodingConfiguration(object):
 
 # TODO: Rename CodingPlan to something like DatasetConfiguration?
 class CodingPlan(object):
-    def __init__(self, raw_field, coda_filename, coding_configurations, raw_field_folding_mode, time_field=None,
-                 run_id_field=None, icr_filename=None, id_field=None, code_imputation_function=None):
+    def __init__(self, raw_field, coda_filename, coding_configurations, raw_field_folding_mode, ws_code=None,
+                 time_field=None, run_id_field=None, icr_filename=None, id_field=None, code_imputation_function=None):
         self.raw_field = raw_field
         self.time_field = time_field
         self.run_id_field = run_id_field
@@ -44,6 +44,7 @@ class CodingPlan(object):
         self.icr_filename = icr_filename
         self.coding_configurations = coding_configurations
         self.code_imputation_function = code_imputation_function
+        self.ws_code = ws_code
         self.raw_field_folding_mode = raw_field_folding_mode
 
         if id_field is None:
@@ -69,6 +70,7 @@ class PipelineConfiguration(object):
                                folding_mode=FoldingModes.MATRIX
                            )
                        ],
+                       ws_code=CodeSchemes.WS_CORRECT_DATASET.get_code_with_match_value("s03e01 bossaso"),
                        raw_field_folding_mode=FoldingModes.CONCATENATE),
 
             CodingPlan(raw_field="rqa_s03e02_raw",
@@ -85,6 +87,7 @@ class PipelineConfiguration(object):
                                folding_mode=FoldingModes.MATRIX
                            )
                        ],
+                       ws_code=CodeSchemes.WS_CORRECT_DATASET.get_code_with_match_value("s03e02 bossaso"),
                        raw_field_folding_mode=FoldingModes.CONCATENATE),
 
             CodingPlan(raw_field="rqa_s03e03_raw",
@@ -101,6 +104,7 @@ class PipelineConfiguration(object):
                                folding_mode=FoldingModes.MATRIX
                            )
                        ],
+                       ws_code=CodeSchemes.WS_CORRECT_DATASET.get_code_with_match_value("s03e03 bossaso"),
                        raw_field_folding_mode=FoldingModes.CONCATENATE),
 
             CodingPlan(raw_field="rqa_s03e04_raw",
@@ -117,6 +121,7 @@ class PipelineConfiguration(object):
                                folding_mode=FoldingModes.MATRIX
                            )
                        ],
+                       ws_code=CodeSchemes.WS_CORRECT_DATASET.get_code_with_match_value("s03e04 bossaso"),
                        raw_field_folding_mode=FoldingModes.CONCATENATE)
             ]
 
@@ -135,6 +140,7 @@ class PipelineConfiguration(object):
                                folding_mode=FoldingModes.MATRIX
                            )
                        ],
+                       ws_code=CodeSchemes.WS_CORRECT_DATASET.get_code_with_match_value("s03e01 baidoa"),
                        raw_field_folding_mode=FoldingModes.CONCATENATE),
 
             CodingPlan(raw_field="rqa_s03e02_raw",
@@ -151,6 +157,7 @@ class PipelineConfiguration(object):
                                folding_mode=FoldingModes.MATRIX
                            )
                        ],
+                       ws_code=CodeSchemes.WS_CORRECT_DATASET.get_code_with_match_value("s03e02 baidoa"),
                        raw_field_folding_mode=FoldingModes.CONCATENATE),
 
             CodingPlan(raw_field="rqa_s03e03_raw",
@@ -167,6 +174,7 @@ class PipelineConfiguration(object):
                                folding_mode=FoldingModes.MATRIX
                            )
                        ],
+                       ws_code=CodeSchemes.WS_CORRECT_DATASET.get_code_with_match_value("s03e03 baidoa"),
                        raw_field_folding_mode=FoldingModes.CONCATENATE),
 
             CodingPlan(raw_field="rqa_s03e04_raw",
@@ -183,6 +191,7 @@ class PipelineConfiguration(object):
                                folding_mode=FoldingModes.MATRIX
                            )
                        ],
+                       ws_code=CodeSchemes.WS_CORRECT_DATASET.get_code_with_match_value("s03e04 baidoa"),
                        raw_field_folding_mode=FoldingModes.CONCATENATE)
         ]
 
@@ -244,6 +253,7 @@ class PipelineConfiguration(object):
                        )
                    ],
                    code_imputation_function=code_imputation_functions.impute_somalia_location_codes,
+                   ws_code=CodeSchemes.WS_CORRECT_DATASET.get_code_with_match_value("location"),
                    raw_field_folding_mode=FoldingModes.ASSERT_EQUAL),
 
         CodingPlan(raw_field="gender_raw",
@@ -259,6 +269,7 @@ class PipelineConfiguration(object):
                            folding_mode=FoldingModes.ASSERT_EQUAL
                        )
                    ],
+                   ws_code=CodeSchemes.WS_CORRECT_DATASET.get_code_with_match_value("gender"),
                    raw_field_folding_mode=FoldingModes.ASSERT_EQUAL),
 
         CodingPlan(raw_field="age_raw",
@@ -274,6 +285,7 @@ class PipelineConfiguration(object):
                            folding_mode=FoldingModes.ASSERT_EQUAL
                        )
                    ],
+                   ws_code=CodeSchemes.WS_CORRECT_DATASET.get_code_with_match_value("age"),
                    raw_field_folding_mode=FoldingModes.ASSERT_EQUAL),
 
         CodingPlan(raw_field="recently_displaced_raw",
@@ -289,6 +301,7 @@ class PipelineConfiguration(object):
                            folding_mode=FoldingModes.ASSERT_EQUAL
                        )
                    ],
+                   ws_code=CodeSchemes.WS_CORRECT_DATASET.get_code_with_match_value("recently displaced"),
                    raw_field_folding_mode=FoldingModes.ASSERT_EQUAL),
 
         CodingPlan(raw_field="in_idp_camp_raw",
@@ -304,6 +317,7 @@ class PipelineConfiguration(object):
                            folding_mode=FoldingModes.ASSERT_EQUAL
                        )
                    ],
+                   ws_code=CodeSchemes.WS_CORRECT_DATASET.get_code_with_match_value("in idp camp"),
                    raw_field_folding_mode=FoldingModes.ASSERT_EQUAL),
 
         CodingPlan(raw_field="have_voice_raw",
