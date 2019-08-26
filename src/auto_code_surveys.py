@@ -33,6 +33,7 @@ class AutoCodeSurveys(object):
         out_of_range_count = 0
         for td in data:
             for plan in PipelineConfiguration.SURVEY_CODING_PLANS:
+                # TODO: Come up with a better solution here e.g. separate DEMOG/SURVEY lists
                 if plan.raw_field in ["have_voice_raw", "suggestions_raw"]:
                     continue
 

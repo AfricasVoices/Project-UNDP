@@ -72,16 +72,9 @@ if __name__ == "__main__":
         y=altair.Y("count:Q", title="Number of Messages")
     ).properties(
         title="Messages per Show"
-    ).mark_text(
-        align="center",
-        baseline="middle"
-    ).encode(
-        text="count:Q"
     )
     chart.save(f"{output_dir}/messages_per_show.html")
     chart.save(f"{output_dir}/messages_per_show.png", scale_factor=IMG_SCALE_FACTOR)
-
-    exit(0)
 
     # Compute the number of individuals in each show and graph
     log.info(f"Graphing the number of individuals who responded to each show...")
