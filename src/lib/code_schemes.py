@@ -34,6 +34,6 @@ class CodeSchemes(object):
 
     HAVE_VOICE_YES_NO_AMB = _open_scheme("have_voice_yes_no_amb.json")
     HAVE_VOICE_REASONS = _open_scheme("have_voice_reasons.json")
-    MORE_INCLUDED_REASONS = _open_scheme("more_included_reasons.json")
+    SUGGESTIONS = _open_scheme("suggestions.json")
 
     WS_CORRECT_DATASET = _open_scheme("ws_correct_dataset.json")

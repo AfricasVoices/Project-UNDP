@@ -343,16 +343,15 @@ class PipelineConfiguration(object):
                    code_imputation_function=code_imputation_functions.impute_yes_no_reasons_codes,
                    raw_field_folding_mode=FoldingModes.ASSERT_EQUAL),
 
-        CodingPlan(raw_field="more_included_raw",
-                   time_field="more_included_time",
-                   coda_filename="more_included.json",
+        CodingPlan(raw_field="suggestions_raw",
+                   time_field="suggestions_time",
+                   coda_filename="suggestions.json",
                    coding_configurations=[
                        CodingConfiguration(
                            coding_mode=CodingModes.MULTIPLE,
-                           code_scheme=CodeSchemes.MORE_INCLUDED_REASONS,
-                           cleaner=somali.DemographicCleaner.clean_yes_no,
-                           coded_field="more_included_coded",
-                           analysis_file_key="more_included_",
+                           code_scheme=CodeSchemes.SUGGESTIONS,
+                           coded_field="suggestions_coded",
+                           analysis_file_key="suggestions_",
                            folding_mode=FoldingModes.MATRIX
                        )
                    ],

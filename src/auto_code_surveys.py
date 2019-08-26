@@ -33,6 +33,9 @@ class AutoCodeSurveys(object):
         out_of_range_count = 0
         for td in data:
             for plan in PipelineConfiguration.SURVEY_CODING_PLANS:
+                if plan.raw_field in ["have_voice_raw", "suggestions_raw"]:
+                    continue
+
                 if plan.time_field in td and isoparse(td[plan.time_field]) > pipeline_configuration.project_end_date:
                     out_of_range_count += 1
                     td.hide_keys({plan.raw_field, plan.time_field},
