@@ -9,7 +9,7 @@ from storage.google_cloud import google_cloud_utils
 from storage.google_drive import drive_client_wrapper
 
 from src import CombineRawDatasets, TranslateRapidProKeys, AutoCodeShowMessages, AutoCodeSurveys, ProductionFile, \
-    AnalysisFile, ApplyManualCodes
+    AnalysisFile, ApplyManualCodes, WSCorrection
 from src.lib import PipelineConfiguration, MessageFilters
 from src.lib.pipeline_configuration import CodeSchemes
 
@@ -131,7 +131,7 @@ if __name__ == "__main__":
     data = TranslateRapidProKeys.translate_rapid_pro_keys(user, data, pipeline_configuration, prev_coded_dir_path)
 
     log.info("Redirecting WS messages...")
-    # data = WSCorrection.move_wrong_scheme_messages(user, data, prev_coded_dir_path)
+    data = WSCorrection.move_wrong_scheme_messages(user, data, prev_coded_dir_path)
 
     log.info("Auto Coding Messages...")
     data = AutoCodeShowMessages.auto_code_show_messages(user, data, pipeline_configuration, icr_output_dir, coded_dir_path)
