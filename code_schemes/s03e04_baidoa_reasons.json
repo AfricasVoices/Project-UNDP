@@ -3,7 +3,94 @@
   "Name": "S03E04 Baidoa Reasons",
   "Version": "0.0.0.1",
   "Codes": [
-
+    {
+      "CodeID": "code-a879a128",
+      "CodeType": "Normal",
+      "DisplayText": "job creation",
+      "NumericValue": 1,
+      "StringValue": "job_creation",
+      "VisibleInCoda": true
+    },
+    {
+      "CodeID": "code-b3e187fc",
+      "CodeType": "Normal",
+      "DisplayText": "stop aid dependency",
+      "NumericValue": 2,
+      "StringValue": "stop_aid_dependency",
+      "VisibleInCoda": true
+    },
+    {
+      "CodeID": "code-294ca20b",
+      "CodeType": "Normal",
+      "DisplayText": "resettlement",
+      "NumericValue": 3,
+      "StringValue": "resettlement",
+      "VisibleInCoda": true
+    },
+    {
+      "CodeID": "code-083cf409",
+      "CodeType": "Normal",
+      "DisplayText": "return",
+      "NumericValue": 4,
+      "StringValue": "return",
+      "VisibleInCoda": true
+    },
+    {
+      "CodeID": "code-877c3e63",
+      "CodeType": "Normal",
+      "DisplayText": "community collaboration",
+      "NumericValue": 5,
+      "StringValue": "community_collaboration",
+      "VisibleInCoda": true
+    },
+    {
+      "CodeID": "code-3a151384",
+      "CodeType": "Normal",
+      "DisplayText": "support for farming",
+      "NumericValue": 6,
+      "StringValue": "support_for_farming",
+      "VisibleInCoda": true
+    },
+    {
+      "CodeID": "code-7a2fba28",
+      "CodeType": "Normal",
+      "DisplayText": "start up capital",
+      "NumericValue": 7,
+      "StringValue": "start_up_capital",
+      "VisibleInCoda": true
+    },
+    {
+      "CodeID": "code-139bb653",
+      "CodeType": "Normal",
+      "DisplayText": "support from NGOs",
+      "NumericValue": 8,
+      "StringValue": "support_from_NGOs",
+      "VisibleInCoda": true
+    },
+    {
+      "CodeID": "code-1df29dfd",
+      "CodeType": "Normal",
+      "DisplayText": "awareness creation",
+      "NumericValue": 9,
+      "StringValue": "awareness_creation",
+      "VisibleInCoda": true
+    },
+    {
+      "CodeID": "code-14407a78",
+      "CodeType": "Normal",
+      "DisplayText": "government support",
+      "NumericValue": 10,
+      "StringValue": "government_support",
+      "VisibleInCoda": true
+    },
+    {
+      "CodeID": "code-336bd4cf",
+      "CodeType": "Normal",
+      "DisplayText": "other",
+      "NumericValue": 11,
+      "StringValue": "other",
+      "VisibleInCoda": true
+    },
     {
       "CodeID": "code-NA-f93d3eb7",
       "CodeType": "Control",
