@@ -3,7 +3,54 @@
   "Name": "Suggestions",
   "Version": "0.0.0.1",
   "Codes": [
-
+    {
+      "CodeID": "code-723a9438",
+      "CodeType": "Normal",
+      "DisplayText": "continue with programming",
+      "NumericValue": 1,
+      "StringValue": "continue_with_programming",
+      "VisibleInCoda": true
+    },
+    {
+      "CodeID": "code-3eeb42ff",
+      "CodeType": "Normal",
+      "DisplayText": "improve quality",
+      "NumericValue": 2,
+      "StringValue": "improve_quality",
+      "VisibleInCoda": true
+    },
+    {
+      "CodeID": "code-5fe62af2",
+      "CodeType": "Normal",
+      "DisplayText": "honesty from radio broadcast",
+      "NumericValue": 3,
+      "StringValue": "honesty_from_radio_broadcast",
+      "VisibleInCoda": true
+    },
+    {
+      "CodeID": "code-1cdc3a86",
+      "CodeType": "Normal",
+      "DisplayText": "improve participation",
+      "NumericValue": 4,
+      "StringValue": "improve_participation",
+      "VisibleInCoda": true
+    },
+    {
+      "CodeID": "code-cf9352a6",
+      "CodeType": "Normal",
+      "DisplayText": "improve radio stations",
+      "NumericValue": 5,
+      "StringValue": "improve_radio_stations",
+      "VisibleInCoda": true
+    },
+    {
+      "CodeID": "code-a730428c",
+      "CodeType": "Normal",
+      "DisplayText": "other",
+      "NumericValue": 6,
+      "StringValue": "other",
+      "VisibleInCoda": true
+    },
     {
       "CodeID": "code-NA-f93d3eb7",
       "CodeType": "Control",
