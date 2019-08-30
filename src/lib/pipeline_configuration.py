@@ -318,6 +318,43 @@ class PipelineConfiguration(object):
                        )
                    ],
                    ws_code=CodeSchemes.WS_CORRECT_DATASET.get_code_with_match_value("in idp camp"),
+                   raw_field_folding_mode=FoldingModes.ASSERT_EQUAL),
+
+        CodingPlan(raw_field="have_voice_raw",
+                   time_field="have_voice_time",
+                   coda_filename="have_voice.json",
+                   coding_configurations=[
+                       CodingConfiguration(
+                           coding_mode=CodingModes.SINGLE,
+                           code_scheme=CodeSchemes.HAVE_VOICE_YES_NO_AMB,
+                           cleaner=somali.DemographicCleaner.clean_yes_no,
+                           coded_field="have_voice_yes_no_amb_coded",
+                           analysis_file_key="have_voice_yes_no_amb",
+                           folding_mode=FoldingModes.ASSERT_EQUAL
+                       ),
+                       CodingConfiguration(
+                           coding_mode=CodingModes.MULTIPLE,
+                           code_scheme=CodeSchemes.HAVE_VOICE_REASONS,
+                           coded_field="have_voice_reasons_coded",
+                           analysis_file_key="have_voice_reasons_",
+                           folding_mode=FoldingModes.MATRIX
+                       )
+                   ],
+                   code_imputation_function=code_imputation_functions.impute_yes_no_reasons_codes,
+                   raw_field_folding_mode=FoldingModes.ASSERT_EQUAL),
+
+        CodingPlan(raw_field="suggestions_raw",
+                   time_field="suggestions_time",
+                   coda_filename="suggestions.json",
+                   coding_configurations=[
+                       CodingConfiguration(
+                           coding_mode=CodingModes.MULTIPLE,
+                           code_scheme=CodeSchemes.SUGGESTIONS,
+                           coded_field="suggestions_coded",
+                           analysis_file_key="suggestions_",
+                           folding_mode=FoldingModes.MATRIX
+                       )
+                   ],
                    raw_field_folding_mode=FoldingModes.ASSERT_EQUAL)
     ]
 
