@@ -3,7 +3,86 @@
   "Name": "S03E03 Baidoa Reasons",
   "Version": "0.0.0.1",
   "Codes": [
-
+    {
+      "CodeID": "code-968bc70f",
+      "CodeType": "Normal",
+      "DisplayText": "return IDPs",
+      "NumericValue": 1,
+      "StringValue": "return_IDPs",
+      "VisibleInCoda": true
+    },
+    {
+      "CodeID": "code-80a84d26",
+      "CodeType": "Normal",
+      "DisplayText": "IDPs should work with the security forces",
+      "NumericValue": 2,
+      "StringValue": "IDPs_should_work_with_the_security_forces",
+      "VisibleInCoda": true
+    },
+    {
+      "CodeID": "code-3e7fa6ab",
+      "CodeType": "Normal",
+      "DisplayText": "job creation",
+      "NumericValue": 3,
+      "StringValue": "job_creation",
+      "VisibleInCoda": true
+    },
+    {
+      "CodeID": "code-944d727e",
+      "CodeType": "Normal",
+      "DisplayText": "advocacy and promotion of rights",
+      "NumericValue": 4,
+      "StringValue": "advocacy_and_promotion_of_rights",
+      "VisibleInCoda": true
+    },
+    {
+      "CodeID": "code-72646558",
+      "CodeType": "Normal",
+      "DisplayText": "housing provision",
+      "NumericValue": 5,
+      "StringValue": "housing_provision",
+      "VisibleInCoda": true
+    },
+    {
+      "CodeID": "code-8ef6d8f3",
+      "CodeType": "Normal",
+      "DisplayText": "government protection",
+      "NumericValue": 6,
+      "StringValue": "government_protection",
+      "VisibleInCoda": true
+    },
+    {
+      "CodeID": "code-103f3850",
+      "CodeType": "Normal",
+      "DisplayText": "general assistance",
+      "NumericValue": 7,
+      "StringValue": "general_assistance",
+      "VisibleInCoda": true
+    },
+    {
+      "CodeID": "code-9760f7c2",
+      "CodeType": "Normal",
+      "DisplayText": "awareness creation",
+      "NumericValue": 8,
+      "StringValue": "awareness_creation",
+      "VisibleInCoda": true
+    },
+    {
+      "CodeID": "code-c7ec8c5e",
+      "CodeType": "Normal",
+      "DisplayText": "justice",
+      "NumericValue": 9,
+      "StringValue": "justice",
+      "VisibleInCoda": true
+    },
+    {
+      "CodeID": "code-414dde27",
+      "CodeType": "Normal",
+      "DisplayText": "other",
+      "NumericValue": 10,
+      "StringValue": "other",
+      "VisibleInCoda": true
+    },
     {
       "CodeID": "code-NA-f93d3eb7",
       "CodeType": "Control",
