@@ -331,16 +331,8 @@ class PipelineConfiguration(object):
                            coded_field="have_voice_yes_no_amb_coded",
                            analysis_file_key="have_voice_yes_no_amb",
                            folding_mode=FoldingModes.ASSERT_EQUAL
-                       ),
-                       CodingConfiguration(
-                           coding_mode=CodingModes.MULTIPLE,
-                           code_scheme=CodeSchemes.HAVE_VOICE_REASONS,
-                           coded_field="have_voice_reasons_coded",
-                           analysis_file_key="have_voice_reasons_",
-                           folding_mode=FoldingModes.MATRIX
                        )
                    ],
-                   code_imputation_function=code_imputation_functions.impute_yes_no_reasons_codes,
                    raw_field_folding_mode=FoldingModes.ASSERT_EQUAL),
 
         CodingPlan(raw_field="suggestions_raw",
