@@ -167,7 +167,7 @@ class TranslateRapidProKeys(object):
             null_keys = set()
             for plan in PipelineConfiguration.RQA_CODING_PLANS + PipelineConfiguration.SURVEY_CODING_PLANS:
                 if plan.raw_field in td and td[plan.raw_field] is None:
-                    null_keys |= {plan.raw_field, plan.time_field}
+                    null_keys.update({plan.raw_field, plan.time_field})
             td.hide_keys(null_keys, Metadata(user, Metadata.get_call_location(), TimeUtils.utc_now_as_iso_string()))
 
     @classmethod
